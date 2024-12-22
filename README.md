@@ -1,15 +1,14 @@
 # Neovim Dotfiles
 
----
 
 ## ✨ Features
 
 - **Minimalist Design:** Clean and focused user interface.
-- **Modern Plugins:** Leveraging the power of Lua for speed and efficiency.
-- **Modular Configuration:** Easily extendable and maintainable.
+- **Modern Plugins:** Oldies can be goodies, but some of these new plugins just better(ies?)
+- **Modular Configuration:** Easy to extend and maintain.
 - **Intuitive Keybindings:** Streamlined navigation and editing experience.
 - **Rich Developer Tools:** LSP, Treesitter, Git integration, and more.
-- **Enhanced Aesthetics:** Eye-pleasing themes and smooth animations.
+- **Enhanced Aesthetics:** Eye-pleasing themes.
 
 ---
 
@@ -82,6 +81,34 @@ https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
    ```bash
    git clone https://github.com/lcpichette/sensible-oxo ~/.config/nvim
    ```
+
+---
+
+## ☑️ To-Do
+
+Eventually I'd like to make a stupidly-simple interface for updating your neovim configuration while keeping it highly performant (`sensible`), with an opinionated styling, workflow, and toolset (`oxo`).
+
+I'd like to think I'm 85% of the way their with the `oxo`, and about 20% of the way there with the `sensible`. Moving away from Astronvim removes bloat and LazyVim is innately pretty-easy to configure and the plugin location and file naming is I believe, mostly, pretty sensible. 
+
+To get `oxo` to 100% we're going to need community feedback about alternatives (some plugins like fzf-lua vs telescope was a very intentional decision and I will NOT be adding it as a config option due to its a performance issues). Approved (specifiable in config) tools should be able to be turned on and off via the variable config (which does not exist yet). But, if there's a plugin you'd like to see supported via config option specify that in an issue on this repo -- I'm open to suggestions!
+
+- [ ] Variable configs
+   - Description: Changing variables in a config table `{ ascii_art = "cat" }` to `{ ascii_art = "saturn" }` will, in this example, change the ascii art shown by alpha-nvim to be a saturn instead of the current cat. 
+   - [ ] Establish design Information Architecture that is easy to tweak and read `sensible-oxo`-specific configs that make performant changes to the overall project (We shouldn't load every config option; only load what we need and only when we need it)
+   - [ ] Create config structure and default file.
+   - [ ] Create loader to read these config options and load only what's relevant as per the specified config
+   - [ ] Support the following config options:
+      - [ ] Ascii Art changes to "dashboard" `{ ascii_art = "cat" }`
+      - [ ] "Magic" LSP,Lint,Format selection based on desired supported filetypes `{ support_fts = { "lua", "ts", "js", "zig", "jsx", "tsx" } }`
+      - [ ] Git (buffer) `{ git_buffer = true }`
+      - [ ] Diagnostics (buffer) `{ diagnostics_buffer = true }`
+      - [ ] Lualine selectable presets `{ lualine_preset = "default" }`
+      - [ ] Commandline location `{ commandline_style = "floating" }`
+- [~] Fix inconsistent coloring in ascii art
+- [ ] Add project navigation
+- [ ] Add quick terminal options (floating, horizontal, etc)
+- [ ] Add sessions, if not too harmful to load time
+- [~] Fix impatient not caching plugins to `~/.cache/nvim/luachache`
 
 ---
 
