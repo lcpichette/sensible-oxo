@@ -13,6 +13,19 @@
 
 ---
 
+## 🎥 Random Showcases
+
+- File creation, manipulation, searching, saving. (Oil, fzf-lua, arrow)
+- Code snippets, autocomplete, git tracking, diagnostics, lsp indicators
+https://github.com/user-attachments/assets/239f7596-3697-4c63-b94c-054479dfd87c
+
+-- Motions with spider (`w` on `B` for `BufReadPre` goes to `R` instead of next word) and hop (`fts` search across buffer for `ts`).
+https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
+
+
+
+---
+
 ## 📦 Plugin Overview
 
 ### Plugins (36)
