@@ -228,17 +228,10 @@ return {
     "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- Add dependencies if needed
     config = function()
-      -- Initialize the dashboard theme
       local alpha = require("alpha")
       local dashboard = require("alpha.themes.dashboard")
 
-      vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#7dcfff" }) -- Example: Blue text color
-      vim.api.nvim_set_hl(0, "AlphaButtons", { fg = "#bb9af7" }) -- Example: Purple text for buttons
-
-      -- Apply the highlight group to the header
-      dashboard.section.header.opts.hl = "AlphaHeader"
-
-      -- Customize the dashboard header
+      -- the dashboard header
       dashboard.section.header.val = [[
         _                ___       _.--.
         \`.|\..----...-'`   `-._.-'_.-'`
@@ -249,8 +242,22 @@ return {
 bug.       {_.-``-'         {_/
       ]]
 
-      -- Optionally customize the buttons (emptying them as per your original config)
-      dashboard.section.buttons.val = {}
+      dashboard.section.buttons.val = {
+        dashboard.button("f", "  Find Files", ":FzfLua files<CR>"),
+        dashboard.button("w", "󰈭  Live Grep", ":FzfLua live_grep<CR>"),
+        dashboard.button("b", "  Open Buffers", ":FzfLua buffers<CR>"),
+        dashboard.button("h", "󰋖  Help Tags", ":FzfLua help_tags<CR>"),
+        dashboard.button("q", "󰅚  Quit", ":qa<CR>"),
+      }
+
+      -- center content
+      dashboard.config.layout = {
+        { type = "padding", val = 8 }, -- Add top padding
+        dashboard.section.header,
+        { type = "padding", val = 2 }, -- Space between header and buttons
+        dashboard.section.buttons,
+        { type = "padding", val = 2 }, -- Add some padding after buttons
+      }
 
       -- Set up the alpha with the customized dashboard
       alpha.setup(dashboard.opts)

@@ -7,6 +7,7 @@ keymap("n", "<C-l>", "<Cmd>wincmd l<CR>", { noremap = true, silent = true })
 
 -- Opinionated settings
 vim.opt.mouse = ""
+vim.g.mapleader = " "
 
 -- Plugin-related keybinds
 local map = vim.keymap.set
@@ -30,3 +31,16 @@ map("n", "<leader>qc", ":cclose<CR>", { desc = "Close Quickfix List" })
 -- Optionally map a key to jump to the next Quickfix item
 map("n", "<leader>qn", ":cnext<CR>", { desc = "Next Quickfix" })
 map("n", "<leader>qp", ":cprev<CR>", { desc = "Prev Quickfix" })
+
+-- ============================================
+-- = Commenting-related mappings              =
+-- ============================================
+local comment_api = require("Comment.api")
+
+map("n", "<leader>/", function()
+  comment_api.toggle.linewise.current()
+end, { desc = "Toggle Commment" })
+
+map("x", "<leader>/", function()
+  comment_api.toggle.blockwise.current()
+end, { desc = "Toggle Commment" })

@@ -154,4 +154,10 @@ return {
       highlight = { enable = true },
     },
   },
+
+  -- Comment code selections easier
+  {
+    "numToStr/Comment.nvim",
+    opts = {},
+  },
 }
