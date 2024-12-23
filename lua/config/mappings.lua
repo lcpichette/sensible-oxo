@@ -44,3 +44,30 @@ end, { desc = "Toggle Commment" })
 map("x", "<leader>/", function()
   comment_api.toggle.blockwise.current()
 end, { desc = "Toggle Commment" })
+
+-- ============================================
+-- = FZF-Lua custom mappings                  =
+-- ============================================
+-- Todo-Comment specific integration w/ fzf-lua
+map("n", "<leader>tf", function()
+  require("fzf-lua").grep({ search = "TODO|FIX|HACK|WARN|NOTE" })
+end, { desc = "Search TODOs with fzf-lua" })
+
+map("n", "<leader>tc", function()
+  require("fzf-lua").live_grep({ rg_opts = "--type lua -e TODO|FIX|HACK" })
+end, { desc = "Live grep TODOs in Lua files" })
+
+-- ============================================
+-- = Navigation-related mappings              =
+-- ============================================
+-- Map for nvim-navbuddy to open the navigation UI
+map("n", "<leader>fc", function()
+  require("nvim-navbuddy").open()
+end, { desc = "Find by Code Scope" })
+
+-- ============================================
+-- = Grug-Far Mappings                        =
+-- ============================================
+map("n", "<leader>fr", function()
+  require("grug-far").open({ windowCreationCommand = "vsplit" })
+end, { desc = "Find and Replace" })

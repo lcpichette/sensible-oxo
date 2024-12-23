@@ -78,6 +78,32 @@ return {
     end,
   },
 
+  -- In-buffer navigation
+  -- Needs to be loaded before LSPs
+  {
+    "SmiteshP/nvim-navbuddy",
+    dependencies = {
+      "MunifTanjim/nui.nvim", -- Required for UI components
+      "nvim-lua/plenary.nvim",
+      "SmiteshP/nvim-navic", -- Required for navigation
+    },
+    opts = {
+      window = {
+        border = "rounded", -- Rounded window borders
+        size = "90%",
+        padding = { 1, 1, 1, 1 }, -- Add padding
+      },
+      highlights = {
+        Normal = { fg = "#f2f4f8", bg = "#161616" }, -- Oxocarbon normal colors
+        Border = { fg = "#525252", bg = "#161616" }, -- Oxocarbon border
+      },
+      lsp = {
+        auto_attach = true, -- Automatically attach to language servers
+      },
+    },
+    lazy = false, -- Ensure it is loaded early
+  },
+
   -- Mason setup for LSP installation and configuration
   {
     "williamboman/mason.nvim",
@@ -96,7 +122,15 @@ return {
       local lspconfig = require("lspconfig")
       require("mason-lspconfig").setup_handlers({
         function(server_name) -- Default handler for all servers
-          lspconfig[server_name].setup({})
+          lspconfig[server_name].setup({
+            on_attach = function(client, bufnr)
+              -- Attach nvim-navbuddy if available
+              local navbuddy = require("nvim-navbuddy")
+              if navbuddy then
+                navbuddy.attach(client, bufnr)
+              end
+            end,
+          })
         end,
         -- Custom handler for lua-language-server
         ["lua_ls"] = function()
