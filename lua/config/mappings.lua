@@ -81,12 +81,10 @@ map("n", "<leader>uk", "<cmd>ShowkeysToggle<CR>", { desc = "Show Keys while typi
 -- ============================================
 -- = Custom Modules Mappings                  =
 -- ============================================
+-- Custom search
 local custom_search = require("custom_search")
 vim.keymap.set("n", "/", custom_search.searchFile, { desc = "Custom FZF lgrep logic" })
 
--- ============================================
--- = Neorg Mappings                           =
--- ============================================
-map("n", "<leader>n", function()
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":Neorg workspace notes<CR>", true, false, true), "n", true)
-end, { desc = "Open Notes" })
+-- Custom notes
+local custom_notes = require("custom_notes")
+vim.keymap.set("n", "<leader>n", custom_notes.openNote, { desc = "Open Notes" })

@@ -172,4 +172,40 @@ return {
       })
     end,
   },
+
+  -- Tabbing just working
+  {
+    "tpope/vim-sleuth",
+    lazy = false, -- Load immediately since it needs to monitor buffer changes
+    config = function()
+      -- For example, disable conceal feature if you prefer
+      vim.g.sleuth_conceal = false
+    end,
+  },
+
+  -- Automatically create pairs (e.g. insert `]` when you press `[`)
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-autopairs").setup({
+        check_ts = true,
+        map_complete = true,
+        fast_wrap = {
+          map = "<M-e>", -- Keybinding to trigger fast wrap
+          chars = { "{", "[", "(", '"', "'" },
+          pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
+          offset = 0, -- Offset from cursor position
+          end_key = "$",
+          keys = "qwertyuiopzxcvbnmasdfghjkl",
+          check_comma = true,
+          highlight = "PmenuSel",
+          highlight_grey = "LineNr",
+        },
+      })
+    end,
+    dependencies = {
+      "hrsh7th/nvim-cmp",
+    },
+  },
 }

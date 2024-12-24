@@ -1,8 +1,5 @@
 -- Caches plugins for faster loading
-local ok, impatient = pcall(require, "impatient")
-if ok then
-  impatient.enable_profile() -- Optional: Enable profiling
-end
+vim.loader.enable()
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
