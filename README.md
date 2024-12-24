@@ -1,7 +1,7 @@
 # (Sensible) Neovim Dotfiles, Oxocarbon-Themed
 
-![2024-12-24@04 59 24 December-24@2x](https://github.com/user-attachments/assets/5fd74dc4-5d37-4e29-80ee-03eb156e1e3e)
 
+![2024-12-24@04 33 36 December-24@2x](https://github.com/user-attachments/assets/054f75e9-1586-48a4-91df-204b0b2c4486)
 
 
 ## ✨ Features
@@ -15,6 +15,17 @@
 
 
 ## 🎥 Random Showcases
+
+- File fuzzy searching (fzf-lua)
+- Better quickfix lists and opening results into paneled splits on the same buffer (fzf-lua + bqf)
+
+
+
+https://github.com/user-attachments/assets/c3ccd7ad-f2b6-4be4-abcb-f469ff339256
+
+
+
+---
 
 - File creation, manipulation, saving. (Oil)
 - File fuzzy searching (fzf-lua)
