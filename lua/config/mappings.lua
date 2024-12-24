@@ -42,10 +42,6 @@ map("n", "<leader>/", function()
   comment_api.toggle.linewise.current()
 end, { desc = "Toggle Commment" })
 
-map("x", "<leader>/", function()
-  comment_api.toggle.blockwise.current()
-end, { desc = "Toggle Commment" })
-
 -- ============================================
 -- = FZF-Lua custom mappings                  =
 -- ============================================
@@ -57,14 +53,6 @@ end, { desc = "Search TODOs with fzf-lua" })
 map("n", "<leader>tc", function()
   require("fzf-lua").live_grep({ rg_opts = "--type lua -e TODO|FIX|HACK" })
 end, { desc = "Live grep TODOs in Lua files" })
-
--- ============================================
--- = Navigation-related mappings              =
--- ============================================
--- Map for nvim-navbuddy to open the navigation UI
-map("n", "<leader>fc", function()
-  require("nvim-navbuddy").open()
-end, { desc = "Find by Code Scope" })
 
 -- ============================================
 -- = Grug-Far Mappings                        =
@@ -88,11 +76,3 @@ vim.keymap.set("n", "/", custom_search.searchFile, { desc = "Custom FZF lgrep lo
 -- Custom notes
 local custom_notes = require("custom_notes")
 vim.keymap.set("n", "<leader>n", custom_notes.openNote, { desc = "Open Notes" })
-
--- Custom Git
--- local custom_git = require("custom_git")
-local git = require("neogit")
--- vim.keymap.set("n", "<leader>g", custom_git.open_neogit, { desc = "Open Git" })
-vim.keymap.set("n", "<leader>g", function()
-  git.open({ kind = "replace" })
-end, { desc = "Open Git" })

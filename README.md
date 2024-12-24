@@ -28,18 +28,19 @@ https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
 
 ## 📦 Plugin Overview
 
-### Plugins (36)
+### Installed Plugins (41)
 | Plugin | Purpose |
 |--------|---------|
 | [alpha-nvim](https://github.com/goolord/alpha-nvim) | Start screen customization |
 | [arrow.nvim](https://github.com/arrow-plugin/arrow.nvim) | Smooth navigation and UI enhancements |
+| [Comment.nvim](https://github.com/numToStr/Comment.nvim) | Commenting utility |
 | [conform.nvim](https://github.com/stevearc/conform.nvim) | Automatic formatting |
 | [dressing.nvim](https://github.com/stevearc/dressing.nvim) | UI improvements for input/select |
 | [fidget.nvim](https://github.com/j-hui/fidget.nvim) | LSP progress indicators |
+| [fzf-lua](https://github.com/ibhagwan/fzf-lua) | Fuzzy finder |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git integration |
 | [hardtime.nvim](https://github.com/m4xshen/hardtime.nvim) | Discourage bad habits |
 | [hop.nvim](https://github.com/phaazon/hop.nvim) | Quick navigation |
-| [impatient.nvim](https://github.com/lewis6991/impatient.nvim) | Optimize startup time |
 | [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Indentation guides |
 | [lazy.nvim](https://github.com/folke/lazy.nvim) | Plugin manager |
 | [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | Statusline |
@@ -52,20 +53,29 @@ https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
 | [oil.nvim](https://github.com/stevearc/oil.nvim) | File explorer |
 | [oxocarbon.nvim](https://github.com/nyoom-engineering/oxocarbon.nvim) | Theme |
 | [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) | Common utilities |
-| [rainbow-delimiters.nvim](https://github.com/luukvbaal/rainbow-delimiters.nvim) | Bracket colorization |
 | [targets.vim](https://github.com/wellle/targets.vim) | Extended text objects |
+| [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) | Highlight and search TODOs |
+| [vim-sleuth](https://github.com/tpope/vim-sleuth) | Indentation detection |
 | [which-key.nvim](https://github.com/folke/which-key.nvim) | Keybinding hints |
 | [cmp-buffer](https://github.com/hrsh7th/cmp-buffer) | Autocompletion source for buffer |
 | [cmp-nvim-lsp](https://github.com/hrsh7th/cmp-nvim-lsp) | LSP source for nvim-cmp |
 | [cmp-path](https://github.com/hrsh7th/cmp-path) | Path completion |
-| [fzf-lua](https://github.com/ibhagwan/fzf-lua) | Fuzzy finder |
+| [mason-lspconfig.nvim](https://github.com/williamboman/mason-lspconfig.nvim) | Mason LSP configs |
 | [mason.nvim](https://github.com/williamboman/mason.nvim) | LSP/DAP installer |
+| [nvim-autopairs](https://github.com/windwp/nvim-autopairs) | Auto-closing pairs |
 | [nvim-bqf](https://github.com/kevinhwang91/nvim-bqf) | Better quickfix window |
 | [nvim-cmp](https://github.com/hrsh7th/nvim-cmp) | Completion engine |
 | [nvim-spider](https://github.com/chrisgrieser/nvim-spider) | Enhanced motions |
-| [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) | Highlight and search TODOs |
+| [showkeys.nvim](https://github.com/mrjones2014/showkeys.nvim) | Display active keybindings |
 | [trouble.nvim](https://github.com/folke/trouble.nvim) | Diagnostics and quickfix UI |
 | [vim-startuptime](https://github.com/dstein64/vim-startuptime) | Startup profiling |
+
+### Disabled Plugins (3)
+| Plugin | Purpose |
+|--------|---------|
+| [grug-far.nvim](https://github.com/example/grug-far.nvim) | Disabled |
+| [neogit](https://github.com/TimUntersberger/neogit) | Disabled |
+| [rainbow-delimiters.nvim](https://github.com/luukvbaal/rainbow-delimiters.nvim) | Disabled |
 
 ---
 

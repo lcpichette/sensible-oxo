@@ -90,6 +90,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons", "lewis6991/gitsigns.nvim" },
+    event = "BufWinEnter",
     config = function()
       local lualine = require("lualine")
 
@@ -104,23 +105,6 @@ return {
       vim.api.nvim_set_hl(0, "LualineDiffAdd", { fg = oxo.blue })
       vim.api.nvim_set_hl(0, "LualineDiffChange", { fg = oxo.purple })
       vim.api.nvim_set_hl(0, "LualineDiffDelete", { fg = oxo.red })
-
-      -- Helper function to abbreviate the folder path
-      local function abbreviate_path(filepath)
-        local parts = vim.split(filepath, "/")
-        for i = 1, #parts - 1 do
-          parts[i] = parts[i]:sub(1, 2) -- Keep only the first 2 characters of each folder
-        end
-        return table.concat(parts, "/")
-      end
-
-      -- Custom filename component with abbreviated folders
-      local function custom_filename()
-        local filepath = vim.fn.expand("%:p") -- Full file path
-        local relative_path = vim.fn.fnamemodify(filepath, ":~:.:") -- Relative to cwd
-        return abbreviate_path(relative_path)
-      end
-
       local function git_diff()
         local gitsigns_data = vim.b.gitsigns_status_dict
         if not gitsigns_data then
@@ -176,7 +160,7 @@ return {
             },
           },
           lualine_b = {
-            { custom_filename, color = { fg = oxo.fg } },
+            { "filename", color = { fg = oxo.fg } },
           },
           lualine_c = {
             {
@@ -225,6 +209,7 @@ return {
   -- "Splash art" for opening neovim without specifying a file
   {
     "goolord/alpha-nvim",
+    event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- Add dependencies if needed
     config = function()
       local alpha = require("alpha")
@@ -348,6 +333,8 @@ bug.       {_.-``-'         {_/
   -- Neogit for ui Git interactions
   {
     "NeogitOrg/neogit",
+    cmd = "Neogit", -- Defer loading until command
+    enabled = false,
     dependencies = {
       "nvim-lua/plenary.nvim", -- required
       "sindrets/diffview.nvim", -- optional - Diff integration

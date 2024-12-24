@@ -2,7 +2,7 @@ return {
   -- Telescope: Fuzzy Finder
   {
     "ibhagwan/fzf-lua",
-    cmd = "FzfLua",
+    cmd = { "Files", "Rg" },
     dependencies = {
       "nvim-tree/nvim-web-devicons", -- optional for file icons
     },

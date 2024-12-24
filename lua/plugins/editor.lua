@@ -164,6 +164,8 @@ return {
   -- Graphically-pleasing Search and Replace
   {
     "MagicDuck/grug-far.nvim",
+    event = "VeryLazy",
+    enabled = false,
     config = function()
       require("grug-far").setup({
         -- options, see Configuration section below
