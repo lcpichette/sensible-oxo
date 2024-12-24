@@ -65,20 +65,22 @@ return {
     end,
   },
 
-  -- lualine dependency
+  -- Git signs left of line numbers
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" }, -- Load on file open
     config = function()
+      -- ▉ ▊ ▋ ▌ ▍ ▎▏
+      local char = "▎"
       require("gitsigns").setup({
         signs = {
-          add = { text = "+" },
-          change = { text = "~" },
-          delete = { text = "-" },
+          add = { text = char },
+          change = { text = char },
+          delete = { text = char },
         },
       })
 
-      vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#7aa2f7" }) -- Blue
+      vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#3DDC97" }) -- Green
       vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#bb9af7" }) -- Purple
       vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = "#f7768e" }) -- Red
     end,
@@ -230,9 +232,10 @@ return {
 
       -- the dashboard header
       dashboard.section.header.val = [[
+      ⠀
         _                ___       _.--.
         \`.|\..----...-'`   `-._.-'_.-'`
-        /  ' `         ,       __.--'
+        /  ' `         ,       __.^
         )/' _/     \   `-_,   /
         `-'" `"\_  ,_.-;_.-\_ ',     
             _.-'_./   {_.'   ; /
