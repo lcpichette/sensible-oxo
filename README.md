@@ -141,13 +141,13 @@ NOT STARTED:
 - [ ] Add sessions, if not too harmful to load time
 
 WIP:
-- [ ] Fix impatient not caching plugins to `~/.cache/nvim/luachache`
 - [ ] Add custom notes
    - [ ] Syntax highlighting
    - [ ] Persistent changes
    - [ ] Incredibly quick to load notes and the module
 
 DONE:
+- [x] Change `/` to use fzf-lua + vim search register w/ Oxo highlighting.
 - [x] Fix inconsistent coloring in ascii art
 
 ## 🤝 Credits
