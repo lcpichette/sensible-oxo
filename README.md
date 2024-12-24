@@ -123,6 +123,7 @@ I'd like to think I'm 85% of the way their with the `oxo`, and about 20% of the 
 
 To get `oxo` to 100% we're going to need community feedback about alternatives (some plugins like fzf-lua vs telescope was a very intentional decision and I will NOT be adding it as a config option due to its a performance issues). Approved (specifiable in config) tools should be able to be turned on and off via the variable config (which does not exist yet). But, if there's a plugin you'd like to see supported via config option specify that in an issue on this repo -- I'm open to suggestions!
 
+NOT STARTED:
 - [ ] Variable configs
    - Description: Changing variables in a config table `{ ascii_art = "cat" }` to `{ ascii_art = "saturn" }` will, in this example, change the ascii art shown by alpha-nvim to be a saturn instead of the current cat. 
    - [ ] Establish design Information Architecture that is easy to tweak and read `sensible-oxo`-specific configs that make performant changes to the overall project (We shouldn't load every config option; only load what we need and only when we need it)
@@ -135,12 +136,17 @@ To get `oxo` to 100% we're going to need community feedback about alternatives (
       - [ ] Diagnostics (buffer) `{ diagnostics_buffer = true }`
       - [ ] Lualine selectable presets `{ lualine_preset = "default" }`
       - [ ] Commandline location `{ commandline_style = "floating" }`
-- [~] Fix inconsistent coloring in ascii art
 - [ ] Add project navigation
 - [ ] Add quick terminal options (floating, horizontal, etc)
 - [ ] Add sessions, if not too harmful to load time
-- [~] Fix impatient not caching plugins to `~/.cache/nvim/luachache`
-
+WIP:
+- [ ] Fix impatient not caching plugins to `~/.cache/nvim/luachache`
+- [ ] Add custom notes
+   - [ ] Syntax highlighting
+   - [ ] Persistent changes
+   - [ ] Incredibly quick to load notes and the module
+DONE:
+- [x] Fix inconsistent coloring in ascii art
 
 ## 🤝 Credits
 
