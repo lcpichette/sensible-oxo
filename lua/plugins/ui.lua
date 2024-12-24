@@ -344,4 +344,15 @@ bug.       {_.-``-'         {_/
       show_count = true,
     },
   },
+
+  -- Neogit for ui Git interactions
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+      "ibhagwan/fzf-lua", -- optional
+    },
+    config = true,
+  },
 }
