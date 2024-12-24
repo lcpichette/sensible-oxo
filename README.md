@@ -71,11 +71,30 @@ https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
 | [vim-startuptime](https://github.com/dstein64/vim-startuptime) | Startup profiling |
 
 ### Disabled Plugins (3)
+
+These are plugins that I may want to enable in the future -- whether I find myself needing them,
+willing to compromise the performance hit for them, or find additional ways to better mitigate their
+performance hits. 
+
+Due to this, I've left them in the codebase but disabled (no performance hit).
+
 | Plugin | Purpose |
 |--------|---------|
 | [grug-far.nvim](https://github.com/example/grug-far.nvim) | Disabled |
 | [neogit](https://github.com/TimUntersberger/neogit) | Disabled |
 | [rainbow-delimiters.nvim](https://github.com/luukvbaal/rainbow-delimiters.nvim) | Disabled |
+
+### Rejected Plugins
+
+These are plugins I tried and either felt didn't fit within the desired workflow or performance guidelines this project set out to meet.
+
+| Plugin | Reason |
+|--------|--------|
+| [Neorg](https://github.com/nvim-neorg/neorg) | Performance hit was 20+ms, and workflow can be met with simpler tooling |
+| [Telescope](https://github.com/nvim-telescope/telescope.nvim) | Performance hit was 15+ms even after optimizing it, fzf-lua fits the workflow and is more performant |
+| Anything AI | Coding is more fun when you know what you're doing |
+| [Trailblazer](https://github.com/LeonHeidelbach/trailblazer.nvim) | Arrow fits my personal development workflow better, open to moving this to `disabled` instead |
+| [Menu](https://github.com/nvzone/menu) | Anti-synergy between Mouse + Neovim IMO, maybe I'm misunderstanding if it has keyboard potential. Other plugins I'd rather have in exchange for its performance hit. |
 
 ---
 
