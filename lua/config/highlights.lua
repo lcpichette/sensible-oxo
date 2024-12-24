@@ -26,3 +26,8 @@ vim.cmd([[
   highlight! CmpItemKindText guifg=#ABB2BF guibg=NONE
   highlight! CmpItemKindClass guifg=#E06C75 guibg=NONE
 ]])
+
+-- Search results
+vim.api.nvim_set_hl(0, "Search", { fg = "#161616", bg = "#78A9FF", bold = true }) -- Oxocarbon blue for search matches
+vim.api.nvim_set_hl(0, "IncSearch", { fg = "#161616", bg = "#3DDC97", bold = true })
+vim.api.nvim_set_hl(0, "CurSearch", { fg = "#161616", bg = "#3DDC97", bold = true }) -- Oxocarbon green

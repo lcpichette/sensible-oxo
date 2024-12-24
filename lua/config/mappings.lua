@@ -4,6 +4,7 @@ keymap("n", "<C-k>", "<Cmd>wincmd k<CR>", { noremap = true, silent = true })
 keymap("n", "<C-j>", "<Cmd>wincmd j<CR>", { noremap = true, silent = true })
 keymap("n", "<C-h>", "<Cmd>wincmd h<CR>", { noremap = true, silent = true })
 keymap("n", "<C-l>", "<Cmd>wincmd l<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "q", ":nohlsearch<CR>", { noremap = true, silent = true })
 
 -- Opinionated settings
 vim.opt.mouse = ""
@@ -71,3 +72,15 @@ end, { desc = "Find by Code Scope" })
 map("n", "<leader>fr", function()
   require("grug-far").open({ windowCreationCommand = "vsplit" })
 end, { desc = "Find and Replace" })
+
+-- ============================================
+-- = ShowKeys Mappings                        =
+-- ============================================
+map("n", "<leader>uk", "<cmd>ShowkeysToggle<CR>", { desc = "Show Keys while typing" })
+
+map("n", "<leader>m", function()
+  require("menu").open("default")
+end, { desc = "Open menu" })
+
+local custom_search = require("custom_search")
+vim.keymap.set("n", "/", custom_search.searchFile, { desc = "Custom FZF lgrep logic" })
