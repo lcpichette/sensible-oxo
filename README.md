@@ -1,4 +1,7 @@
-# Neovim Dotfiles
+# (Sensible) Neovim Dotfiles, Oxocarbon-Themed
+
+![2024-12-24@04 59 24 December-24@2x](https://github.com/user-attachments/assets/5fd74dc4-5d37-4e29-80ee-03eb156e1e3e)
+
 
 
 ## ✨ Features
