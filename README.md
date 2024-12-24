@@ -139,12 +139,14 @@ NOT STARTED:
 - [ ] Add project navigation
 - [ ] Add quick terminal options (floating, horizontal, etc)
 - [ ] Add sessions, if not too harmful to load time
+
 WIP:
 - [ ] Fix impatient not caching plugins to `~/.cache/nvim/luachache`
 - [ ] Add custom notes
    - [ ] Syntax highlighting
    - [ ] Persistent changes
    - [ ] Incredibly quick to load notes and the module
+
 DONE:
 - [x] Fix inconsistent coloring in ascii art
 
