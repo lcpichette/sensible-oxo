@@ -90,5 +90,9 @@ local custom_notes = require("custom_notes")
 vim.keymap.set("n", "<leader>n", custom_notes.openNote, { desc = "Open Notes" })
 
 -- Custom Git
-local custom_git = require("custom_git")
-vim.keymap.set("n", "<leader>gn", custom_git.open_floating_neogit, { desc = "Open Git" })
+-- local custom_git = require("custom_git")
+local git = require("neogit")
+-- vim.keymap.set("n", "<leader>g", custom_git.open_neogit, { desc = "Open Git" })
+vim.keymap.set("n", "<leader>g", function()
+  git.open({ kind = "replace" })
+end, { desc = "Open Git" })
