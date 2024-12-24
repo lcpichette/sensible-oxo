@@ -115,7 +115,8 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ts_ls" }, -- Automatically install Lua and TypeScript LSPs
+        ensure_installed = { "lua_ls", "ts_ls", "tailwindcss" }, -- Automatically install Lua and TypeScript LSPs
+        automatic_installation = true,
       })
 
       -- Automatically configure servers via mason-lspconfig and nvim-lspconfig
@@ -132,6 +133,33 @@ return {
             end,
           })
         end,
+
+        -- TailwindCSS configuration
+        ["tailwindcss"] = function()
+          require("lspconfig").tailwindcss.setup({
+            filetypes = { "css", "scss", "svelte" }, -- TailwindCSS-specific filetypes
+            root_dir = require("lspconfig.util").root_pattern(
+              "tailwind.config.js",
+              "tailwind.config.ts",
+              "postcss.config.js",
+              "postcss.config.ts",
+              ".git"
+            ),
+          })
+        end,
+
+        -- CSSLS configuration
+        ["cssls"] = function()
+          local capabilities = vim.lsp.protocol.make_client_capabilities()
+          capabilities.textDocument.completion.completionItem.snippetSupport = true -- Enable snippet support
+
+          require("lspconfig").cssls.setup({
+            capabilities = capabilities,
+            filetypes = { "css", "scss", "less" }, -- Keep CSSLS for CSS and SCSS
+            root_dir = require("lspconfig.util").root_pattern(".git", "package.json"),
+          })
+        end,
+
         -- Custom handler for lua-language-server
         ["lua_ls"] = function()
           lspconfig.lua_ls.setup({
@@ -145,6 +173,7 @@ return {
             },
           })
         end,
+
         -- Custom handler for ts_ls (used to be tsserver) (TypeScript and JavaScript support)
         ["ts_ls"] = function()
           lspconfig.ts_ls.setup({
