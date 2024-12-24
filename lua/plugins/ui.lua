@@ -91,7 +91,6 @@ return {
     config = function()
       local lualine = require("lualine")
 
-      -- Define Oxocarbon color palette
       local oxo = {
         fg = "#edf0fc", -- Default foreground
         purple = "#bb9af7", -- Purple for edits
@@ -120,7 +119,6 @@ return {
         return abbreviate_path(relative_path)
       end
 
-      -- Helper function to display git diff stats
       local function git_diff()
         local gitsigns_data = vim.b.gitsigns_status_dict
         if not gitsigns_data then
@@ -139,7 +137,6 @@ return {
         )
       end
 
-      -- Helper function to get active LSP servers
       local function lsp_info()
         local clients = vim.lsp.get_active_clients({ bufnr = 0 })
         if #clients == 0 then
@@ -259,27 +256,25 @@ bug.       {_.-``-'         {_/
         { type = "padding", val = 2 }, -- Add some padding after buttons
       }
 
-      -- Set up the alpha with the customized dashboard
       alpha.setup(dashboard.opts)
     end,
   },
 
   -- Changes alerts, command line aesthetic and location, and some other ui things
-
   {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
       cmdline = {
         enabled = true,
-        view = "cmdline", -- Use the classic cmdline view
+        view = "cmdline",
         opts = {
           position = {
             row = 0, -- Position at the very top
             col = 2, -- Align to the left
           },
           size = {
-            width = "80%", -- Extend across the width of the buffer
+            width = "80%",
             height = 1, -- Keep it one line tall
           },
         },
@@ -333,6 +328,17 @@ bug.       {_.-``-'         {_/
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
+    },
+  },
+
+  -- Show keys while typing
+  {
+    "nvzone/showkeys",
+    cmd = "ShowkeysToggle",
+    opts = {
+      timeout = 1,
+      maxkeys = 5,
+      show_count = true,
     },
   },
 }
