@@ -209,7 +209,6 @@ return {
   -- "Splash art" for opening neovim without specifying a file
   {
     "goolord/alpha-nvim",
-    event = "VeryLazy",
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- Add dependencies if needed
     config = function()
       local alpha = require("alpha")

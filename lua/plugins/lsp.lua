@@ -88,26 +88,14 @@ return {
     cmd = { "Mason", "MasonInstall", "MasonUpdate" },
     config = function()
       require("mason").setup()
+
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ts_ls", "tailwindcss" }, -- Automatically install Lua and TypeScript LSPs
+        ensure_installed = { "lua_ls", "ts_ls", "tailwindcss" }, -- Automatically install Lua, tailwind, and TypeScript LSPs
         automatic_installation = true,
       })
 
-      -- Automatically configure servers via mason-lspconfig and nvim-lspconfig
       local lspconfig = require("lspconfig")
       require("mason-lspconfig").setup_handlers({
-        function(server_name) -- Default handler for all servers
-          lspconfig[server_name].setup({
-            on_attach = function(client, bufnr)
-              -- Attach nvim-navbuddy if available
-              local navbuddy = require("nvim-navbuddy")
-              if navbuddy then
-                navbuddy.attach(client, bufnr)
-              end
-            end,
-          })
-        end,
-
         -- TailwindCSS configuration
         ["tailwindcss"] = function()
           require("lspconfig").tailwindcss.setup({
