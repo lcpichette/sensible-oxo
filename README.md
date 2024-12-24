@@ -10,21 +10,25 @@
 - **Rich Developer Tools:** LSP, Treesitter, Git integration, and more.
 - **Enhanced Aesthetics:** Eye-pleasing themes.
 
----
 
 ## 🎥 Random Showcases
 
-- File creation, manipulation, searching, saving. (Oil, fzf-lua, arrow)
-- Code snippets, autocomplete, git tracking, diagnostics, lsp indicators
+- File creation, manipulation, saving. (Oil)
+- File fuzzy searching (fzf-lua)
+- File favoriting (Arrow -- "Harpoon-like")
+- Code snippets, formatting, autocomplete, git tracking, diagnostics, lsp indicators
+- Toggleable ShowKeys (deferred to load only when ran -- for performance)
 
-https://github.com/user-attachments/assets/239f7596-3697-4c63-b94c-054479dfd87c
+https://github.com/user-attachments/assets/6a78d7ab-eda4-463a-a839-850ec7f1ce38
 
--- Motions with spider (`w` on `B` for `BufReadPre` goes to `R` instead of next word) and hop (`fts` search across buffer for `ts`).
+---
+
+- Motions:
+   - Spider (`w` on `B` for `BufReadPre` goes to `R` instead of next word)
+   - Hop (`fts` search across buffer for `ts`).
 
 https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
 
-
----
 
 ## 📦 Plugin Overview
 
@@ -96,7 +100,6 @@ These are plugins I tried and either felt didn't fit within the desired workflow
 | [Trailblazer](https://github.com/LeonHeidelbach/trailblazer.nvim) | Arrow fits my personal development workflow better, open to moving this to `disabled` instead |
 | [Menu](https://github.com/nvzone/menu) | Anti-synergy between Mouse + Neovim IMO, maybe I'm misunderstanding if it has keyboard potential. Other plugins I'd rather have in exchange for its performance hit. |
 
----
 
 ## 🛠️ Installation
 
@@ -111,7 +114,6 @@ These are plugins I tried and either felt didn't fit within the desired workflow
    git clone https://github.com/lcpichette/sensible-oxo ~/.config/nvim
    ```
 
----
 
 ## ☑️ To-Do
 
@@ -139,7 +141,6 @@ To get `oxo` to 100% we're going to need community feedback about alternatives (
 - [ ] Add sessions, if not too harmful to load time
 - [~] Fix impatient not caching plugins to `~/.cache/nvim/luachache`
 
----
 
 ## 🤝 Credits
 
