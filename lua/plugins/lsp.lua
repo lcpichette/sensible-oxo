@@ -185,8 +185,9 @@ return {
         fg = "#c0caf5", -- Default foreground
         purple = "#bb9af7", -- Purple
         blue = "#7aa2f7", -- Blue
-        green = "#7dcfff", -- Green for LSP
+        green = "#7dcfff",
         red = "#f7768e", -- Red for diagnostics
+        yellow = "#f49800",
       }
 
       -- Custom lualine theme with no background colors
@@ -258,7 +259,7 @@ return {
           lualine_x = {
             {
               custom_filename,
-              symbols = { modified = " ●", readonly = " 🔒", unnamed = "[No Name]" },
+              symbols = { modified = " ●", readonly = " 🔒", unnamed = "" },
             },
           },
           lualine_y = {
@@ -275,7 +276,7 @@ return {
                 color_error = { fg = oxo.red },
                 color_warn = { fg = oxo.purple },
                 color_info = { fg = oxo.blue },
-                color_hint = { fg = oxo.green },
+                color_hint = { fg = oxo.yellow },
               },
             },
             {

@@ -25,12 +25,11 @@ end
 function M.openNote()
   -- Move create user command to setup
   vim.api.nvim_create_user_command("OxoNotes", function()
-    print("test")
     local buf = vim.api.nvim_create_buf(false, true)
     local file_path = expand_tilde(CONFIG.dir)
     local file = io.open(file_path, "r")
 
-    print("test 2" .. CONFIG.dir)
+    print("test 3" .. CONFIG.dir)
     if file == nil then
       print("Invalid directory specified for notes")
       return

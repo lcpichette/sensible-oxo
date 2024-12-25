@@ -46,6 +46,7 @@ end, { desc = "Toggle Commment" })
 -- = FZF-Lua custom mappings                  =
 -- ============================================
 -- Todo-Comment specific integration w/ fzf-lua
+-- TODO: Fix this
 map("n", "<leader>tf", function()
   require("fzf-lua").grep({ search = "TODO|FIX|HACK|WARN|NOTE" })
 end, { desc = "Search TODOs with fzf-lua" })

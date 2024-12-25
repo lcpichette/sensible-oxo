@@ -76,7 +76,7 @@ return {
         signs = {
           add = { text = char },
           change = { text = char },
-          delete = { text = char },
+          delete = { text = "" },
         },
       })
 

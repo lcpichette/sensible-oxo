@@ -1,109 +1,97 @@
 return {
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-nvim-lsp",
+    "saghen/blink.cmp",
+    -- optional: provides snippets for the snippet source
+    dependencies = "rafamadriz/friendly-snippets",
+
+    version = "*",
+    -- If you use nix, you can build from source using latest nightly rust with:
+    -- build = 'nix run .#build-plugin',
+
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      -- 'default' for mappings similar to built-in completion
+      -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+      -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
+      -- See the full "keymap" documentation for information on defining your own keymap.
+      keymap = { preset = "enter" },
+
+      completion = {
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 500,
+        },
+
+        ghost_text = { enabled = true },
+
+        menu = {
+          auto_show = function(ctx)
+            return ctx.mode ~= "cmdline"
+          end,
+          -- Customize the appearance of the completion menu
+          winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+          -- Additional appearance settings
+          min_width = 15,
+          max_height = 10,
+          border = "none",
+          winblend = 0,
+          scrollbar = true,
+          direction_priority = { "s", "n" },
+        },
+      },
+
+      appearance = {
+        -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+        nerd_font_variant = "mono",
+      },
+
+      -- Default list of enabled providers defined so that you can extend it
+      -- elsewhere in your config, without redefining it, due to `opts_extend`
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+      },
     },
-    opts = function(_, opts)
-      local cmp = require("cmp")
-      local kind_icons = {
-        Text = "",
-        Method = "ƒ",
-        Function = "ƒ",
-        Constructor = "",
-        Field = "☐",
-        Variable = "",
-        Class = "",
-        Interface = "",
-        Module = "",
-        Property = "",
-        Unit = "",
-        Value = "",
-        Enum = "",
-        Keyword = "…",
-        Snippet = "",
-        Color = "",
-        File = "",
-        Reference = "",
-        Folder = "",
-        EnumMember = "",
-        Constant = "",
-        Struct = "פּ",
-        Event = "",
-        Operator = "",
-        TypeParameter = "",
-      }
 
-      opts.formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = function(entry, vim_item)
-          local kind_icons = {
-            Text = "",
-            Method = "ƒ",
-            Function = "",
-            Constructor = "",
-            Field = "識",
-            Variable = "",
-            Class = "",
-            Interface = "",
-            Module = "",
-            Property = "",
-            Unit = "",
-            Value = "",
-            Enum = "",
-            Keyword = "",
-            Snippet = "",
-            Color = "",
-            File = "",
-            Reference = "",
-            Folder = "",
-            EnumMember = "",
-            Constant = "",
-            Struct = "פּ",
-            Event = "",
-            Operator = "",
-            TypeParameter = "",
-          }
+    opts_extend = { "sources.default" },
 
-          -- Add the icon with its kind
-          vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind] or "", vim_item.kind)
-
-          -- Ensure no background color for the menu
-          vim_item.menu = ({
-            buffer = "[Buffer]",
-            path = "[Path]",
-            nvim_lsp = "[LSP]",
-          })[entry.source.name]
-
-          return vim_item
-        end,
-      }
-
-      opts.mapping = cmp.mapping.preset.insert({
-        ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
-      })
-
-      opts.sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "buffer" },
-        { name = "path" },
-      })
-
-      return opts
-    end,
+    signature = { enabled = true },
   },
 
   {
     "neovim/nvim-lspconfig",
     config = function()
       local lspconfig = require("lspconfig")
+
+      -- Configure custom diagnostic signs
+      local signs = {
+        Error = "🮖", -- Customize for Error
+        Warn = "🮖", -- Customize for Warning
+        Hint = "󰌶", -- Customize for Hint
+        Info = "󰙎", -- Customize for Information
+      }
+
+      -- Define diagnostic signs globally
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+
+        local colors = {
+          Error = "#d94e89", -- Red
+          Warn = "#f49800", -- Yellow
+          Hint = "#ffe700", -- Green
+          Info = "#7aa2f7", -- Blue
+        }
+        vim.api.nvim_set_hl(0, hl, { fg = colors[type] })
+      end
+
+      -- Configure diagnostics globally
+      vim.diagnostic.config({
+        virtual_text = false, -- Disable virtual text
+        signs = true, -- Enable diagnostic signs
+        underline = true, -- Enable underlining
+        update_in_insert = false, -- Don't show diagnostics in insert mode
+      })
 
       -- Configure LSP servers
       local servers = {
@@ -133,6 +121,7 @@ return {
       }
 
       for server, config in pairs(servers) do
+        config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
         lspconfig[server].setup(config)
       end
     end,
