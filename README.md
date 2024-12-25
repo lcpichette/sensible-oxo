@@ -13,7 +13,6 @@
 - **Rich Developer Tools:** LSP, Treesitter, Git integration, and more.
 - **Enhanced Aesthetics:** Eye-pleasing themes.
 
-
 ## 🎥 Random Showcases
 
 - File fuzzy searching (fzf-lua)
@@ -57,7 +56,6 @@ https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
 | [fidget.nvim](https://github.com/j-hui/fidget.nvim) | LSP progress indicators |
 | [fzf-lua](https://github.com/ibhagwan/fzf-lua) | Fuzzy finder |
 | [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Git integration |
-| [hardtime.nvim](https://github.com/m4xshen/hardtime.nvim) | Discourage bad habits |
 | [hop.nvim](https://github.com/phaazon/hop.nvim) | Quick navigation |
 | [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | Indentation guides |
 | [lazy.nvim](https://github.com/folke/lazy.nvim) | Plugin manager |
@@ -88,7 +86,7 @@ https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
 | [trouble.nvim](https://github.com/folke/trouble.nvim) | Diagnostics and quickfix UI |
 | [vim-startuptime](https://github.com/dstein64/vim-startuptime) | Startup profiling |
 
-### Disabled Plugins (3)
+### Disabled Plugins (4)
 
 These are plugins that I may want to enable in the future -- whether I find myself needing them,
 willing to compromise the performance hit for them, or find additional ways to better mitigate their
@@ -101,6 +99,7 @@ Due to this, I've left them in the codebase but disabled (no performance hit).
 | [grug-far.nvim](https://github.com/example/grug-far.nvim) | Disabled |
 | [neogit](https://github.com/TimUntersberger/neogit) | Disabled |
 | [rainbow-delimiters.nvim](https://github.com/luukvbaal/rainbow-delimiters.nvim) | Disabled |
+| [hardtime.nvim](https://github.com/m4xshen/hardtime.nvim) | Discourage bad habits; Disabled bc I find it doesn't pop-up often and it has non-zero perforamance imapct. |
 
 ### Rejected Plugins
 

@@ -17,6 +17,12 @@ return {
       -- See the full "keymap" documentation for information on defining your own keymap.
       keymap = { preset = "enter" },
 
+      enabled = function()
+        return not vim.tbl_contains({ "markdown" }, vim.bo.filetype)
+          and vim.bo.buftype ~= "prompt"
+          and vim.b.completion ~= false
+      end,
+
       completion = {
         documentation = {
           auto_show = true,
