@@ -71,8 +71,8 @@ return {
 
       -- Configure custom diagnostic signs
       local signs = {
-        Error = "🮖", -- Customize for Error
-        Warn = "🮖", -- Customize for Warning
+        Error = "", -- Customize for Error
+        Warn = "", -- Customize for Warning
         Hint = "󰌶", -- Customize for Hint
         Info = "󰙎", -- Customize for Information
       }
@@ -196,7 +196,7 @@ return {
   {
     "MagicDuck/grug-far.nvim",
     event = "VeryLazy",
-    enabled = false,
+    enabled = true,
     config = function()
       require("grug-far").setup({
         -- options, see Configuration section below
