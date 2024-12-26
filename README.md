@@ -2,6 +2,7 @@
 
 
 ![2024-12-24@04 33 36 December-24@2x](https://github.com/user-attachments/assets/054f75e9-1586-48a4-91df-204b0b2c4486)
+![2024-12-26@13 11 55 December-26@2x](https://github.com/user-attachments/assets/55abd557-d6cf-491d-b64c-c95b6e1a0299)
 
 
 ## ✨ Features
@@ -85,8 +86,9 @@ https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
 | [showkeys.nvim](https://github.com/mrjones2014/showkeys.nvim) | Display active keybindings |
 | [trouble.nvim](https://github.com/folke/trouble.nvim) | Diagnostics and quickfix UI |
 | [vim-startuptime](https://github.com/dstein64/vim-startuptime) | Startup profiling |
+| [grug-far.nvim](https://github.com/example/grug-far.nvim) | Search and replace w/ friendly UI |
 
-### Disabled Plugins (4)
+### Disabled Plugins (3)
 
 These are plugins that I may want to enable in the future -- whether I find myself needing them,
 willing to compromise the performance hit for them, or find additional ways to better mitigate their
@@ -96,7 +98,6 @@ Due to this, I've left them in the codebase but disabled (no performance hit).
 
 | Plugin | Purpose |
 |--------|---------|
-| [grug-far.nvim](https://github.com/example/grug-far.nvim) | Disabled |
 | [neogit](https://github.com/TimUntersberger/neogit) | Disabled |
 | [rainbow-delimiters.nvim](https://github.com/luukvbaal/rainbow-delimiters.nvim) | Disabled |
 | [hardtime.nvim](https://github.com/m4xshen/hardtime.nvim) | Discourage bad habits; Disabled bc I find it doesn't pop-up often and it has non-zero perforamance imapct. |
