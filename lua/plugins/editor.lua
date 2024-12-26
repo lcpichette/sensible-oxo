@@ -134,6 +134,42 @@ return {
   },
 
   {
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local lint = require("lint")
+
+      -- Define linters by filetype
+      lint.linters_by_ft = {
+        -- Lua Linters
+        lua = { "selene", "luacheck" },
+
+        -- JavaScript and TypeScript Linters
+        javascript = { "eslint" },
+        typescript = { "eslint" },
+
+        -- React Specific Linters
+        javascriptreact = { "eslint" },
+        typescriptreact = { "eslint" },
+
+        -- Angular Specific Linters
+        angular = { "eslint" },
+
+        -- Next.js Specific Linters (if applicable)
+        nextjs = { "eslint" },
+      }
+
+      -- Create an autocommand to lint on save
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        pattern = "*",
+        callback = function()
+          lint.try_lint()
+        end,
+      })
+    end,
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter",
     event = "BufReadPre",
     opts = {
