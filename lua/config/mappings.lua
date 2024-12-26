@@ -121,6 +121,8 @@ map("n", "<leader>uk", "<cmd>ShowkeysToggle<CR>", { desc = "Show Keys while typi
 -- Custom search
 local custom_search = require("custom_search")
 vim.keymap.set("n", "/", custom_search.searchFile, { desc = "Custom FZF lgrep logic" })
+-- Enable if you prefer ripgrep to grep
+-- vim.keymap.set("n", "<leader>fw", custom_search.liveRipGrep, { desc = "Find Word" })
 
 -- Custom notes
 local custom_notes = require("custom_notes")

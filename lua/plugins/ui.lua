@@ -228,10 +228,11 @@ bug.       {_.-``-'         {_/
 
       dashboard.section.buttons.val = {
         dashboard.button("f", "  Find Files", ":FzfLua files<CR>"),
-        dashboard.button("w", "󰈭  Live Grep", ":FzfLua live_grep<CR>"),
+        dashboard.button("w", "  Live Grep", ":FzfLua live_grep<CR>"),
+        dashboard.button("r", "  Resume Search", ":FzfLua live_grep<CR>"),
         dashboard.button("b", "  Open Buffers", ":FzfLua buffers<CR>"),
-        dashboard.button("h", "󰋖  Help Tags", ":FzfLua help_tags<CR>"),
-        dashboard.button("q", "󰅚  Quit", ":qa<CR>"),
+        dashboard.button("h", "?  Help Tags", ":FzfLua help_tags<CR>"),
+        dashboard.button("q", "  Quit", ":qa<CR>"),
       }
 
       -- center content
