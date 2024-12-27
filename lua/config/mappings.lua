@@ -34,10 +34,10 @@ map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "Code Definition" })
 -- map("n", "<leader>cr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "Code References" })
 
 -- Using fzf-lua with lsp instead, you can send items from there to quickfix list if you'd like
-map("n", "<leader>cd", "<cmd>lua require('fzf-lua').lsp_definitions()<CR>", opts)
-map("n", "<leader>cD", "<cmd>lua require('fzf-lua').lsp_declarations()<CR>", opts)
-map("n", "<leader>cr", "<cmd>lua require('fzf-lua').lsp_references()<CR>", opts)
-map("n", "<leader>ca", "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>", opts)
+map("n", "<leader>cd", "<cmd>lua require('fzf-lua').lsp_definitions()<CR>", { desc = "Code Definitions" })
+map("n", "<leader>cD", "<cmd>lua require('fzf-lua').lsp_declarations()<CR>", { desc = "Code Declarations" })
+map("n", "<leader>cr", "<cmd>lua require('fzf-lua').lsp_references()<CR>", { desc = "Code References" })
+map("n", "<leader>ca", "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>", { desc = "Code Actions" })
 
 -- ============================================
 -- = fzf-lua file/search-related mappings    =

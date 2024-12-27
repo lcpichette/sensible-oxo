@@ -74,7 +74,6 @@ return {
           current_line_only = false, -- entire visible buffer
         })
       end, { desc = "Hop 2-char search" })
-
       -- “t” motion for 2-character search as well (if desired).
       -- Note: This won’t precisely replicate Vim’s native “t” offset behavior
       -- (jumping *before* the character), but does a 2-char Hop instead.
@@ -90,5 +89,17 @@ return {
   {
     "wellle/targets.vim",
     event = "VeryLazy",
+  },
+
+  -- Add lsp diagnostics to buffer in helix-like style
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+      -- Disable virtual_text since it's redundant with lsp_lines
+      vim.diagnostic.config({
+        virtual_text = false,
+      })
+    end,
   },
 }
