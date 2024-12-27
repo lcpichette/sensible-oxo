@@ -44,7 +44,7 @@ map("n", "<leader>ca", "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>", { d
 -- ============================================
 map("n", "<leader>ff", "<cmd>FzfLua files<CR>", { desc = "Find Files" })
 map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { desc = "Find Word/Grep" })
-map("n", "<leader>fb", "<cmd>FzfLua buffers<CR>", { desc = "Find Buffers" })
+map("n", "<leader>fB", "<cmd>FzfLua buffers<CR>", { desc = "Find Buffers" })
 map("n", "<leader>fh", "<cmd>FzfLua help_tags<CR>", { desc = "Find Help" })
 map("n", "<leader>fl", "<cmd>FzfLua resume<CR>", { desc = "Find last search" })
 map("n", "<leader>fq", function()

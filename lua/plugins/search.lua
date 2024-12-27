@@ -87,6 +87,32 @@ return {
     end,
   },
 
+  -- Bookmarks
+  {
+    "crusj/bookmarks.nvim",
+    keys = {
+      { "<tab><tab>", mode = { "n" } },
+    },
+    branch = "main",
+    dependencies = { "nvim-web-devicons" },
+    config = function()
+      require("bookmarks").setup()
+      require("fzf-lua").setup({
+        bookmarks = {
+          -- Customize fzf-lua's behavior for bookmarks if necessary
+        },
+      })
+
+      -- Add a custom command to trigger bookmarks with fzf-lua
+      vim.api.nvim_set_keymap(
+        "n",
+        "<tab><tab>",
+        ":lua require('fzf-lua').bookmarks()<CR>",
+        { noremap = true, silent = true }
+      )
+    end,
+  },
+
   -- Arrow: Harpoon-alternative for adding freq-acc files
   {
     "otavioschwanck/arrow.nvim",
