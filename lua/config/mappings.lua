@@ -47,9 +47,7 @@ map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { desc = "Find Word/Grep" })
 map("n", "<leader>fB", "<cmd>FzfLua buffers<CR>", { desc = "Find Buffers" })
 map("n", "<leader>fh", "<cmd>FzfLua help_tags<CR>", { desc = "Find Help" })
 map("n", "<leader>fl", "<cmd>FzfLua resume<CR>", { desc = "Find last search" })
-map("n", "<leader>fq", function()
-  require("fzf-lua").fzf_exec("fre --sorted", { fzf_opts = { ["--no-sort"] = "" } })
-end, { desc = "Find by Frecency" })
+map("n", "<leader>fg", "<cmd>FzfLua git_status<CR>", { desc = "Find Changed Files" })
 
 -- ============================================
 -- = fzf-lua git-related mappings    =
