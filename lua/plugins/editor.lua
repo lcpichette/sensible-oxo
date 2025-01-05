@@ -143,38 +143,65 @@ return {
 
   {
     "mfussenegger/nvim-lint",
-    event = { "BufReadPre", "BufNewFile" },
     config = function()
       local lint = require("lint")
 
-      -- Define linters by filetype
       lint.linters_by_ft = {
-        -- Lua Linters
-        lua = { "selene", "luacheck" },
-
-        -- JavaScript and TypeScript Linters
-        javascript = { "eslint" },
-        typescript = { "eslint" },
-
-        -- React Specific Linters
-        javascriptreact = { "eslint" },
-        typescriptreact = { "eslint" },
-
-        -- Angular Specific Linters
-        angular = { "eslint" },
-
-        -- Next.js Specific Linters (if applicable)
-        nextjs = { "eslint" },
+        lua = { "stylua" },
+        javascript = { "prettierd" },
+        javascriptreact = { "prettierd" },
+        typescript = { "prettierd" },
+        typescriptreact = { "prettierd" },
+        angular = { "prettierd" },
+        nextjs = { "prettierd" },
+        zig = { "zigfmt" },
       }
 
-      -- Create an autocommand to lint on save
+      lint.linters.stylua = {
+        name = "stylua",
+        cmd = "stylua",
+        args = {
+          "--search-parent-directories",
+        },
+        stdin = false,
+        parser = function()
+          return {}
+        end,
+      }
+
+      lint.linters.prettierd = {
+        name = "prettierd",
+        cmd = "prettierd",
+        args = { "%:p" },
+        stdin = true,
+        parser = function(output)
+          return {}
+        end,
+      }
+
       vim.api.nvim_create_autocmd("BufWritePost", {
-        pattern = "*",
+        pattern = "*.lua",
         callback = function()
-          lint.try_lint()
+          local filepath = vim.fn.expand("<afile>")
+          vim.fn.system({ "stylua", "--search-parent-directories", filepath })
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        pattern = { "*.js", "*.jsx", "*.ts", "*.tsx", "*.css", "*.json" },
+        callback = function()
+          local filepath = vim.fn.expand("<afile>")
+          vim.fn.system({ "prettierd", filepath })
         end,
       })
     end,
+  },
+
+  {
+    "CWood-sdf/banana.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
   },
 
   {
@@ -189,9 +216,14 @@ return {
         "scss",
         "html",
         "lua",
+        "nml",
+        "zls",
       },
       highlight = { enable = true },
     },
+    config = function()
+      require("banana").initTsParsers()
+    end,
   },
 
   -- Comment code selections easier
