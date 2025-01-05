@@ -4,6 +4,7 @@
 ![2024-12-24@04 33 36 December-24@2x](https://github.com/user-attachments/assets/054f75e9-1586-48a4-91df-204b0b2c4486)
 ![2024-12-26@13 11 55 December-26@2x](https://github.com/user-attachments/assets/55abd557-d6cf-491d-b64c-c95b6e1a0299)
 
+See [gallery](#🎨-gallery) and [random showcases](#🎥-random-showcases) for more...
 
 ## ✨ Features
 
@@ -16,24 +17,20 @@
 
 ## 🎥 Random Showcases
 
-- File fuzzy searching (fzf-lua)
-- Better quickfix lists and opening results into paneled splits on the same buffer (fzf-lua + bqf)
 
+- LSP diagnositcs
+- Multi-line EasyMotion via Hop
 
-
-https://github.com/user-attachments/assets/c3ccd7ad-f2b6-4be4-abcb-f469ff339256
-
+https://github.com/user-attachments/assets/a3163692-00ab-40a4-8637-2671e0358434
 
 
 ---
 
-- File creation, manipulation, saving. (Oil)
-- File fuzzy searching (fzf-lua)
-- File favoriting (Arrow -- "Harpoon-like")
-- Code snippets, formatting, autocomplete, git tracking, diagnostics, lsp indicators
-- Toggleable ShowKeys (deferred to load only when ran -- for performance)
 
-https://github.com/user-attachments/assets/6a78d7ab-eda4-463a-a839-850ec7f1ce38
+- File fuzzy searching (fzf-lua)
+- Better quickfix lists and opening results into paneled splits on the same buffer (fzf-lua + bqf)
+
+https://github.com/user-attachments/assets/c3ccd7ad-f2b6-4be4-abcb-f469ff339256
 
 ---
 
@@ -42,6 +39,8 @@ https://github.com/user-attachments/assets/6a78d7ab-eda4-463a-a839-850ec7f1ce38
    - Hop (`fts` search across buffer for `ts`).
 
 https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
+
+
 
 
 ## 📦 Plugin Overview
@@ -127,6 +126,10 @@ These are plugins I tried and either felt didn't fit within the desired workflow
    ```bash
    git clone https://github.com/lcpichette/sensible-oxo ~/.config/nvim
    ```
+
+
+## 🎨 Gallery
+
 
 
 ## ☑️ To-Do
