@@ -1,40 +1,6 @@
+local DAP_ENABLED = false
+
 return {
-  -- Conform for file formatting
-  {
-    "stevearc/conform.nvim",
-    event = "BufReadPre",
-    opts = {
-      -- Enable format on save
-      format_on_save = {
-        enabled = true,
-        timeout_ms = 2000, -- Time in milliseconds before format times out
-        lsp_fallback = true, -- Fallback to LSP formatting if no formatter is found
-      },
-      -- Specify formatters by filetype
-      formatters_by_ft = {
-        lua = { "stylua" }, -- Use Stylua for Lua files
-
-        -- JavaScript, TypeScript, etc.
-        javascript = { "dprint", "prettierd", "prettier" },
-        javascriptreact = { "dprint", "prettierd", "prettier" },
-        typescript = { "dprint", "prettierd", "prettier" },
-        typescriptreact = { "dprint", "prettierd", "prettier" },
-        angular = { "dprint", "prettierd", "prettier" },
-        nextjs = { "dprint", "prettierd", "prettier" },
-      },
-      -- Override default formatter configurations if necessary
-      formatters = {
-        stylua = {
-          command = "stylua",
-          stdin = true, -- Enable reading from stdin
-        },
-      },
-    },
-    config = function(_, opts)
-      require("conform").setup(opts)
-    end,
-  },
-
   -- dressing.nvim: Improve Neovim's UI for input and selection
   {
     "stevearc/dressing.nvim",
@@ -89,18 +55,40 @@ return {
     config = function()
       require("mason").setup()
 
+      -- Ensure formatters are installed
+      local mason_registry = require("mason-registry")
+      local ensure_installed = {
+        "stylua",
+        "prettierd",
+        "dprint",
+      }
+
+      for _, tool in ipairs(ensure_installed) do
+        local p = mason_registry.get_package(tool)
+        if not p:is_installed() then
+          p:install()
+        end
+      end
+
+      -- Ensure LSPs are installed
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ts_ls", "tailwindcss" }, -- Automatically install Lua, tailwind, and TypeScript LSPs
+        ensure_installed = { "lua_ls", "ts_ls", "tailwindcss", "cssls", "html", "zls" },
         automatic_installation = true,
       })
 
+      -- Reusable capabilities for LSPs
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+
       local lspconfig = require("lspconfig")
+
+      -- LSP-specific setup handlers
       require("mason-lspconfig").setup_handlers({
         -- TailwindCSS configuration
         ["tailwindcss"] = function()
-          require("lspconfig").tailwindcss.setup({
-            filetypes = { "css", "scss", "svelte" }, -- TailwindCSS-specific filetypes
-            root_dir = require("lspconfig.util").root_pattern(
+          lspconfig.tailwindcss.setup({
+            filetypes = { "css", "scss", "svelte", "html" },
+            root_dir = lspconfig.util.root_pattern(
               "tailwind.config.js",
               "tailwind.config.ts",
               "postcss.config.js",
@@ -110,19 +98,25 @@ return {
           })
         end,
 
-        -- CSSLS configuration
-        ["cssls"] = function()
-          local capabilities = vim.lsp.protocol.make_client_capabilities()
-          capabilities.textDocument.completion.completionItem.snippetSupport = true -- Enable snippet support
-
-          require("lspconfig").cssls.setup({
+        -- HTML configuration
+        ["html"] = function()
+          lspconfig.html.setup({
             capabilities = capabilities,
-            filetypes = { "css", "scss", "less" }, -- Keep CSSLS for CSS and SCSS
-            root_dir = require("lspconfig.util").root_pattern(".git", "package.json"),
+            filetypes = { "html", "nml", "templ" },
+            root_dir = lspconfig.util.root_pattern(".git", "package.json"),
           })
         end,
 
-        -- Custom handler for lua-language-server
+        -- CSSLS configuration
+        ["cssls"] = function()
+          lspconfig.cssls.setup({
+            capabilities = capabilities,
+            filetypes = { "css", "scss", "less" },
+            root_dir = lspconfig.util.root_pattern(".git", "package.json"),
+          })
+        end,
+
+        -- Lua-language-server configuration
         ["lua_ls"] = function()
           lspconfig.lua_ls.setup({
             settings = {
@@ -136,7 +130,7 @@ return {
           })
         end,
 
-        -- Custom handler for ts_ls (used to be tsserver) (TypeScript and JavaScript support)
+        -- TypeScript server configuration
         ["ts_ls"] = function()
           lspconfig.ts_ls.setup({
             settings = {
@@ -153,9 +147,19 @@ return {
             },
           })
         end,
+
+        -- Zig language server configuration
+        ["zls"] = function()
+          lspconfig.zls.setup({
+            capabilities = capabilities,
+            filetypes = { "zig" },
+            root_dir = lspconfig.util.root_pattern(".git", "build.zig"),
+          })
+        end,
       })
     end,
   },
+
 
   -- lualine, bottom status line
   {
@@ -318,6 +322,173 @@ return {
         -- Load luvit types when the `vim.uv` word is found
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       },
+    },
+  },
+
+  -- DAP
+  {
+    "nvim-neotest/nvim-nio",
+    enabled = DAP_ENABLED,
+    lazy = true, -- Optional: Load only when needed
+  },
+
+  {
+    "mfussenegger/nvim-dap",
+    enabled = DAP_ENABLED,
+    dependencies = { "nvim-neotest/nvim-nio" },
+    config = function()
+      local dap = require("dap")
+
+      vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" }) -- Small red circle
+      vim.fn.sign_define(
+        "DapBreakpointCondition",
+        { text = "", texthl = "DapBreakpointCondition", linehl = "", numhl = "" }
+      ) -- Branch icon
+      vim.fn.sign_define(
+        "DapBreakpointRejected",
+        { text = "", texthl = "DapBreakpointRejected", linehl = "", numhl = "" }
+      ) -- Small X
+      vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DapLogPoint", linehl = "", numhl = "" }) -- Log icon
+
+      vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = "#ee5396" }) -- Breakpoint: Subtle red
+      vim.api.nvim_set_hl(0, "DapBreakpointCondition", { fg = "#ff832b" }) -- Conditional: Soft orange
+      vim.api.nvim_set_hl(0, "DapBreakpointRejected", { fg = "#fa4d56" }) -- Rejected: Muted red
+      vim.api.nvim_set_hl(0, "DapLogPoint", { fg = "#42be65" }) -- Log point: Calm green
+
+      -- Lua adapter configuration
+      dap.adapters.nlua = function(callback, config)
+        callback({
+          type = "server",
+          host = config.host or "127.0.0.1",
+          port = config.port or 8086,
+        })
+      end
+
+      -- Lua configuration for debugging
+      dap.configurations.lua = {
+        {
+          type = "nlua",
+          request = "attach",
+          name = "Attach to Neovim",
+          host = function()
+            return "127.0.0.1"
+          end,
+          port = function()
+            return 8086
+          end,
+        },
+      }
+    end,
+    keys = {
+      {
+        "<leader>bn",
+        function()
+          require("dap").continue()
+        end,
+        desc = "Start/Continue Debugging",
+      },
+      {
+        "<leader>bv",
+        function()
+          require("dap").step_over()
+        end,
+        desc = "Step Over",
+      },
+      {
+        "<leader>bi",
+        function()
+          require("dap").step_into()
+        end,
+        desc = "Step Into",
+      },
+      {
+        "<leader>bo",
+        function()
+          require("dap").step_out()
+        end,
+        desc = "Step Out",
+      },
+      {
+        "<leader>bb",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        desc = "Toggle Breakpoint",
+      },
+      {
+        "<leader>bc",
+        function()
+          require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+        end,
+        desc = "Set Conditional Breakpoint",
+      },
+      {
+        "<leader>br",
+        function()
+          require("dap").repl.open()
+        end,
+        desc = "Open Debug REPL",
+      },
+      {
+        "<leader>bl",
+        function()
+          require("dap").run_last()
+        end,
+        desc = "Run Last Debugging Session",
+      },
+    },
+  },
+
+  -- UI for DAP
+  {
+    "rcarriga/nvim-dap-ui",
+    enabled = DAP_ENABLED,
+    opts = {
+      layouts = {
+        {
+          elements = {
+            "scopes",
+            "breakpoints",
+            "stacks",
+            "watches",
+          },
+          size = 40,
+          position = "left",
+        },
+        {
+          elements = {
+            "repl",
+            "console",
+          },
+          size = 10,
+          position = "bottom",
+        },
+      },
+    },
+    config = function(_, opts)
+      local dapui = require("dapui")
+      dapui.setup(opts)
+
+      local dap = require("dap")
+      vim.keymap.set("n", "<leader>bu", dapui.toggle, { desc = "Toggle DAP UI" })
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
+    end,
+  },
+
+  -- Virtual text for DAP
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    enabled = DAP_ENABLED,
+    opts = {
+      commented = true,
     },
   },
 }
