@@ -44,6 +44,68 @@ https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
 
 
 
+
+## 🛠️ Installation
+
+1. **Backup Your Existing Configuration**  
+   Before proceeding, ensure you back up your current Neovim configuration to avoid losing any important settings:
+   ```bash
+   mv ~/.config/nvim ~/.config/nvim.backup
+   mv ~/.local/share/nvim ~/.local/share/nvim.backup
+   mv ~/.cache/nvim ~/.cache/nvim.backup
+2. Clone the repository into your Neovim config directory:
+   ```bash
+   git clone https://github.com/lcpichette/sensible-oxo ~/.config/nvim
+   ```
+
+## ⚙️ Configuration
+
+Below you can see the `oxo_config.lua` file (subject to change, as TODOs indicate):
+```lua
+return {
+  -- Functionality-level
+  autocomplete = {
+    blink = true,
+  },
+  dap = false, -- TODO: Expand to permit specifying DAPs
+  lsp = true, -- TODO: Expand to permit specifying LSPs
+  lint = true, --etc.
+  format = true, --etc.
+  fancyLSPPreviews = true,
+  improvedMotions = true, -- Spider.nvim
+  fileSearch = {
+    fzf_lua = true,
+  },
+  quickfix = {
+    quicker = true,
+  },
+
+  -- Package-level
+  git = {
+    neogit = true, -- UI Git interaction in neovim; "Magik" for nvim
+    gitsigns = true, -- git diff indicators in buffer (left of line numbers)
+  },
+  neorg = false,
+  grugfar = false,
+  markview = true,
+  blankline = true,
+  hardtime = false,
+
+  -- Experimental Custom Plugins
+  custom = {
+    notes = true, --TODO: Make this config opt matter
+    silver_search = false, --TODO: Make this config opt matter
+    search_utils = true, --TODO: Make this config opt matter
+  },
+}
+```
+
+In the above, for example, by changing `dap = false` to `dap = true`, we enable a few plugins that enable DAP keybinds and plugins!
+
+
+## 🎨 Gallery
+
+
 ## 📦 Plugin Overview
 
 ### Installed Plugins
@@ -113,68 +175,6 @@ These are plugins I tried and either felt didn't fit within the desired workflow
 | Anything AI | Coding is more fun when you know what you're doing |
 | [Trailblazer](https://github.com/LeonHeidelbach/trailblazer.nvim) | Arrow fits my personal development workflow better, open to moving this to `disabled` instead |
 | [Menu](https://github.com/nvzone/menu) | Anti-synergy between Mouse + Neovim IMO, maybe I'm misunderstanding if it has keyboard potential. Other plugins I'd rather have in exchange for its performance hit. |
-
-
-## 🛠️ Installation
-
-1. **Backup Your Existing Configuration**  
-   Before proceeding, ensure you back up your current Neovim configuration to avoid losing any important settings:
-   ```bash
-   mv ~/.config/nvim ~/.config/nvim.backup
-   mv ~/.local/share/nvim ~/.local/share/nvim.backup
-   mv ~/.cache/nvim ~/.cache/nvim.backup
-2. Clone the repository into your Neovim config directory:
-   ```bash
-   git clone https://github.com/lcpichette/sensible-oxo ~/.config/nvim
-   ```
-
-## Configuration
-
-Below you can see the `oxo_config.lua` file (subject to change, as TODOs indicate):
-```lua
-return {
-  -- Functionality-level
-  autocomplete = {
-    blink = true,
-  },
-  dap = false, -- TODO: Expand to permit specifying DAPs
-  lsp = true, -- TODO: Expand to permit specifying LSPs
-  lint = true, --etc.
-  format = true, --etc.
-  fancyLSPPreviews = true,
-  improvedMotions = true, -- Spider.nvim
-  fileSearch = {
-    fzf_lua = true,
-  },
-  quickfix = {
-    quicker = true,
-  },
-
-  -- Package-level
-  git = {
-    neogit = true, -- UI Git interaction in neovim; "Magik" for nvim
-    gitsigns = true, -- git diff indicators in buffer (left of line numbers)
-  },
-  neorg = false,
-  grugfar = false,
-  markview = true,
-  blankline = true,
-  hardtime = false,
-
-  -- Experimental Custom Plugins
-  custom = {
-    notes = true, --TODO: Make this config opt matter
-    silver_search = false, --TODO: Make this config opt matter
-    search_utils = true, --TODO: Make this config opt matter
-  },
-}
-```
-
-In the above, for example, by changing `dap = false` to `dap = true`, we enable a few plugins that enable DAP keybinds and plugins!
-
-
-## 🎨 Gallery
-
 
 
 ## ☑️ To-Do
