@@ -231,7 +231,9 @@ return {
   -- Comment code selections easier
   {
     "numToStr/Comment.nvim",
-    opts = {},
+    config = function()
+      require("Comment").setup()
+    end,
   },
 
   -- Graphically-pleasing Search and Replace
@@ -259,9 +261,20 @@ return {
   },
 
   -- Automatically create pairs (e.g. insert `]` when you press `[`)
+  -- mini.pairs approach (~1.7ms startup)
+  {
+    "echasnovski/mini.pairs",
+    version = "*",
+    enabled = CONFIG.autopairs.mini,
+    config = function()
+      require("mini.pairs").setup()
+    end,
+  },
+  -- nvim-autopairs approach (~2.6ms startup)
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
+    enabled = CONFIG.autopairs.autopairs,
     config = function()
       require("nvim-autopairs").setup({
         check_ts = true,

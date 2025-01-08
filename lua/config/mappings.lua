@@ -112,11 +112,14 @@ end
 -- ============================================
 -- = Commenting-related mappings              =
 -- ============================================
-local comment_api = require("Comment.api")
-
-map("n", "<leader>/", function()
-  comment_api.toggle.linewise.current()
-end, { desc = "Toggle Commment" })
+if CONFIG.commentToggling then
+  map("n", "<leader>/", function()
+    vim.api.nvim_feedkeys("gcc", "x", true)
+  end, { desc = "Toggle Line Comment" })
+  map("v", "<leader>/", function()
+    vim.api.nvim_feedkeys("gb", "v", true)
+  end, { desc = "Toggle Line Comment" })
+end
 
 -- ============================================
 -- = FZF-Lua custom mappings                  =

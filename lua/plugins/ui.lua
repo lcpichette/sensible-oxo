@@ -1,3 +1,5 @@
+local CONFIG = require("oxo_config")
+
 -- Plugins specific to altering the UI of neovim
 return {
   -- dressing.nvim: Improve Neovim's UI for input and selection
@@ -47,6 +49,7 @@ return {
   {
     "j-hui/fidget.nvim",
     tag = "legacy",
+    enabled = CONFIG.lspStatusIndicators,
     config = function()
       require("fidget").setup({
         text = {
@@ -65,18 +68,20 @@ return {
     end,
   },
 
+  -- statusline, bottom status line (~0.5ms startup time)
   {
-    "beauwilliams/statusline.lua",
-    -- dependencies = { "nvim-tree/nvim-web-devicons", "lewis6991/gitsigns.nvim" },
+    --"beauwilliams/statusline.lua",
+    "lcpichette/statusline-oxo.nvim",
+    enabled = CONFIG.statusline.statusline,
     event = "BufWinEnter",
   },
 
-  -- lualine, bottom status line
+  -- lualine, bottom status line (~4ms+ startup time)
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons", "lewis6991/gitsigns.nvim" },
     event = "BufWinEnter",
-    enabled = false,
+    enabled = CONFIG.statusline.lualine,
     config = function()
       local lualine = require("lualine")
 

@@ -9,12 +9,22 @@ return {
   format = true, --etc.
   fancyLSPPreviews = true,
   improvedMotions = true, -- Spider.nvim
+  lspStatusIndicators = true, -- Messages visible bottom right indiciating load status of LSPs
   fileSearch = {
     fzf_lua = true,
   },
   quickfix = {
     quicker = true,
   },
+  statusline = {
+    lualine = false,
+    statusline = true,
+  },
+  autopairs = {
+    mini = true,
+    autopairs = false,
+  },
+  commentToggling = true,
 
   -- Package-level
   git = {
