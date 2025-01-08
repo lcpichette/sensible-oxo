@@ -1,10 +1,11 @@
-local DAP_ENABLED = false
+local CONFIG = require("oxo_config")
 
 return {
   -- dressing.nvim: Improve Neovim's UI for input and selection
   {
     "stevearc/dressing.nvim",
     event = "VeryLazy", -- Load the plugin when Neovim is idle
+    enabled = CONFIG.dressing,
     opts = {
       -- Customize the UI components
       input = {
@@ -336,13 +337,13 @@ return {
   -- DAP
   {
     "nvim-neotest/nvim-nio",
-    enabled = DAP_ENABLED,
+    enabled = CONFIG.dap,
     lazy = true, -- Optional: Load only when needed
   },
 
   {
     "mfussenegger/nvim-dap",
-    enabled = DAP_ENABLED,
+    enabled = CONFIG.dap,
     dependencies = { "nvim-neotest/nvim-nio" },
     config = function()
       local dap = require("dap")
@@ -450,7 +451,7 @@ return {
   -- UI for DAP
   {
     "rcarriga/nvim-dap-ui",
-    enabled = DAP_ENABLED,
+    enabled = CONFIG.dap,
     opts = {
       layouts = {
         {
@@ -494,7 +495,7 @@ return {
   -- Virtual text for DAP
   {
     "theHamsta/nvim-dap-virtual-text",
-    enabled = DAP_ENABLED,
+    enabled = CONFIG.dap,
     opts = {
       commented = true,
     },

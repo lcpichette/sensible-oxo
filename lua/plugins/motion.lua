@@ -1,10 +1,11 @@
--- nvim/lua/plugins/motion.lua
+local CONFIG = require("oxo_config")
+
 return {
   -- Add hardtime.nvim plugin
   {
     "m4xshen/hardtime.nvim",
     dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    enabled = false,
+    enabled = CONFIG.hardtime,
     opts = {
       disabled_filetypes = { "qf", "netrw", "NvimTree", "lazy", "mason", "oil" },
     },
@@ -14,6 +15,7 @@ return {
   {
     "chrisgrieser/nvim-spider",
     lazy = true,
+    enabled = CONFIG.improvedMotions,
     keys = {
       {
         "w",

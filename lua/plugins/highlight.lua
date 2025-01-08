@@ -1,6 +1,9 @@
+local CONFIG = require("oxo_config")
+
 return {
   {
     "lukas-reineke/indent-blankline.nvim",
+    enabled = CONFIG.blankline,
     main = "ibl",
     opts = {
       indent = {

@@ -1,3 +1,5 @@
+local CONFIG = require("oxo_config")
+
 return {
   {
     "saghen/blink.cmp",
@@ -21,6 +23,7 @@ return {
         return not vim.tbl_contains({ "markdown" }, vim.bo.filetype)
           and vim.bo.buftype ~= "prompt"
           and vim.b.completion ~= false
+          and CONFIG.autocomplete.blink ~= false
       end,
 
       completion = {
@@ -74,6 +77,7 @@ return {
 
   {
     "neovim/nvim-lspconfig",
+    enabled = CONFIG.lsp,
     config = function()
       local lspconfig = require("lspconfig")
 
@@ -145,10 +149,12 @@ return {
   {
     "dnlhc/glance.nvim",
     cmd = "Glance",
+    enabled = CONFIG.fancyLSPPreviews,
   },
 
   {
     "mfussenegger/nvim-lint",
+    enabled = CONFIG.lint,
     config = function()
       local lint = require("lint")
 
@@ -204,13 +210,6 @@ return {
   },
 
   {
-    "CWood-sdf/banana.nvim",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
-  },
-
-  {
     "nvim-treesitter/nvim-treesitter",
     event = "BufReadPre",
     opts = {
@@ -227,9 +226,6 @@ return {
       },
       highlight = { enable = true },
     },
-    config = function()
-      require("banana").initTsParsers()
-    end,
   },
 
   -- Comment code selections easier
@@ -242,7 +238,7 @@ return {
   {
     "MagicDuck/grug-far.nvim",
     event = "VeryLazy",
-    enabled = true,
+    enabled = CONFIG.grugfar,
     config = function()
       require("grug-far").setup({
         -- options, see Configuration section below
@@ -286,5 +282,14 @@ return {
     dependencies = {
       "hrsh7th/nvim-cmp",
     },
+  },
+
+  -- Note taking using neorg (NORG)
+  {
+    "nvim-neorg/neorg",
+    enabled = CONFIG.neorg,
+    lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+    version = "*", -- Pin Neorg to the latest stable release
+    config = true,
   },
 }

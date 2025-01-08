@@ -1,3 +1,4 @@
+local CONFIG = require("oxo_config")
 -- TIPS
 -- <C-i> in fzf-lua selects all files, then `Enter` to send them to quickfix list
 -- `tab` in fzf-lua selects an individual file, then `Etner` to send selected files to quickfix list
@@ -56,11 +57,24 @@ map("n", "<leader>gs", "<cmd>FzfLua git_status<CR>", { desc = "Git Status" })
 map("n", "<leader>gS", "<cmd>FzfLua git_stash<CR>", { desc = "Git Stash" })
 map("n", "<leader>gb", "<cmd>FzfLua git_branches<CR>", { desc = "Git Branches" })
 
--- Glance
-vim.keymap.set("n", "gD", "<CMD>Glance definitions<CR>")
-vim.keymap.set("n", "gR", "<CMD>Glance references<CR>")
-vim.keymap.set("n", "gY", "<CMD>Glance type_definitions<CR>")
-vim.keymap.set("n", "gM", "<CMD>Glance implementations<CR>")
+-- ============================================
+-- = Neogit-related mappings    =
+-- ============================================
+if CONFIG.git.neogit then
+  map("n", "<leader>go", "<cmd>Neogit<cr>", { desc = "Open NeoGit" })
+  map("n", "<leader>gf", "<cmd>Neogit fetch<cr>", { desc = "Fetch" })
+  map("n", "<leader>gB", "<cmd>Neogit branch<cr>", { desc = "Branch" })
+  map("n", "<leader>gg", "<cmd>Neogit commit<cr>", { desc = "Commit" })
+  map("n", "<leader>gp", "<cmd>Neogit push<cr>", { desc = "Push" })
+end
+
+-- ============================================
+-- = Glance (LSP-peak) mappings    =
+-- ============================================
+map("n", "gd", "<CMD>Glance definitions<CR>", { desc = "Find Definitions" })
+map("n", "gr", "<CMD>Glance references<CR>", { desc = "Find References" })
+map("n", "gy", "<CMD>Glance type_definitions<CR>", { desc = "Find Type Definitions" })
+map("n", "gm", "<CMD>Glance implementations<CR>", { desc = "Find Implementations" })
 
 -- ============================================
 -- = Quickfix list-related mappings           =
@@ -79,7 +93,7 @@ local quicker = require("quicker")
 
 -- Define a toggle function for expand/collapse
 local is_expanded = false
-vim.keymap.set("n", "<leader>qt", function()
+map("n", "<leader>qt", function()
   if is_expanded then
     quicker.collapse()
   else
@@ -129,7 +143,7 @@ map("n", "<leader>uk", "<cmd>ShowkeysToggle<CR>", { desc = "Show Keys while typi
 local custom_search = require("custom_search")
 map("n", "/", custom_search.searchFile, { desc = "Custom FZF lgrep logic" })
 -- Enable if you prefer ripgrep to grep
--- vim.keymap.set("n", "<leader>fw", custom_search.liveRipGrep, { desc = "Find Word" })
+-- vim.keymap("n", "<leader>fw", custom_search.liveRipGrep, { desc = "Find Word" })
 
 -- Custom notes
 local custom_notes = require("custom_notes")

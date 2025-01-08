@@ -1,8 +1,11 @@
+local CONFIG = require("oxo_config")
+
 return {
   -- Telescope: Fuzzy Finder
   {
     "ibhagwan/fzf-lua",
     cmd = { "Files", "Rg" },
+    enabled = CONFIG.fileSearch.fzf_lua,
     dependencies = {
       "nvim-tree/nvim-web-devicons", -- optional for file icons
     },
@@ -46,6 +49,7 @@ return {
   {
     "stevearc/quicker.nvim",
     event = "VeryLazy", -- Load quicker.nvim when Neovim is idle
+    enabled = CONFIG.quickfix.quicker,
     opts = {
       edit = {
         -- Enable editing the quickfix like a normal buffer

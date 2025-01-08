@@ -1,6 +1,9 @@
+local CONFIG = require("oxo_config")
+
 return {
   {
     "OXY2DEV/markview.nvim",
+    enabled = CONFIG.markview,
     config = function()
       require("markview")
 
