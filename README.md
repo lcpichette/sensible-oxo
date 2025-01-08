@@ -60,7 +60,7 @@ https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
 
 ## ⚙️ Configuration
 
-Below you can see the `oxo_config.lua` file (subject to change, as TODOs indicate):
+Below you can see the [`oxo_config.lua`](https://github.com/lcpichette/sensible-oxo/blob/main/oxo_config.lua) file (subject to change, as TODOs indicate):
 ```lua
 return {
   -- Functionality-level
@@ -73,12 +73,22 @@ return {
   format = true, --etc.
   fancyLSPPreviews = true,
   improvedMotions = true, -- Spider.nvim
+  lspStatusIndicators = true, -- Messages visible bottom right indiciating load status of LSPs
   fileSearch = {
     fzf_lua = true,
   },
   quickfix = {
     quicker = true,
   },
+  statusline = {
+    lualine = false,
+    statusline = true,
+  },
+  autopairs = {
+    mini = true,
+    autopairs = false,
+  },
+  commentToggling = true,
 
   -- Package-level
   git = {
@@ -90,6 +100,7 @@ return {
   markview = true,
   blankline = true,
   hardtime = false,
+  glance = true,
 
   -- Experimental Custom Plugins
   custom = {
@@ -98,6 +109,7 @@ return {
     search_utils = true, --TODO: Make this config opt matter
   },
 }
+
 ```
 
 In the above, for example, by changing `dap = false` to `dap = true`, we enable a few plugins that enable DAP keybinds and plugins!
