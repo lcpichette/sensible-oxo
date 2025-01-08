@@ -112,7 +112,9 @@ return {
 
 ```
 
-In the above, for example, by changing `dap = false` to `dap = true`, we enable a few plugins that enable DAP keybinds and plugins! I went ahead and recorded this example so you can see it live. In the video we see mappings and plugins being enabled and disabled as per what's set in the config.
+In the above, for example, by changing `dap = false` to `dap = true`, we enable a few plugins that enable DAP keybinds and plugins! I went ahead and recorded this example into a kind of Configuration "Demo" video, so that you can see how it works. In the video we see mappings and plugins being enabled and disabled as per what's set in the config.
+
+### Configuration Demo
 
 https://github.com/user-attachments/assets/53eb0cca-5060-42be-a686-8e48697d4fc6
 
