@@ -86,11 +86,18 @@ return {
     end,
   },
 
+  {
+    "beauwilliams/statusline.lua",
+    -- dependencies = { "nvim-tree/nvim-web-devicons", "lewis6991/gitsigns.nvim" },
+    event = "BufWinEnter",
+  },
+
   -- lualine, bottom status line
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons", "lewis6991/gitsigns.nvim" },
     event = "BufWinEnter",
+    enabled = false,
     config = function()
       local lualine = require("lualine")
 
@@ -334,7 +341,7 @@ bug.       {_.-``-'         {_/
   {
     "NeogitOrg/neogit",
     cmd = "Neogit", -- Defer loading until command
-    enabled = false,
+    enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim", -- required
       "sindrets/diffview.nvim", -- optional - Diff integration

@@ -45,7 +45,7 @@ https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
 
 ## 📦 Plugin Overview
 
-### Installed Plugins (41)
+### Installed Plugins
 | Plugin | Purpose |
 |--------|---------|
 | [alpha-nvim](https://github.com/goolord/alpha-nvim) | Start screen customization |
@@ -86,8 +86,9 @@ https://github.com/user-attachments/assets/22b1b87e-eae7-478a-8111-7d57cdbae483
 | [trouble.nvim](https://github.com/folke/trouble.nvim) | Diagnostics and quickfix UI |
 | [vim-startuptime](https://github.com/dstein64/vim-startuptime) | Startup profiling |
 | [grug-far.nvim](https://github.com/example/grug-far.nvim) | Search and replace w/ friendly UI |
+| [neogit](https://github.com/TimUntersberger/neogit) | Even with its 25ms+ impact, the impact comes upon starting the command `:Neogit <...>` -- the startup time of neovim (`nvim <...>`) isn't actually impacted. |
 
-### Disabled Plugins (3)
+### Disabled Plugins
 
 These are plugins that I may want to enable in the future -- whether I find myself needing them,
 willing to compromise the performance hit for them, or find additional ways to better mitigate their
@@ -97,7 +98,6 @@ Due to this, I've left them in the codebase but disabled (no performance hit).
 
 | Plugin | Purpose |
 |--------|---------|
-| [neogit](https://github.com/TimUntersberger/neogit) | Disabled |
 | [rainbow-delimiters.nvim](https://github.com/luukvbaal/rainbow-delimiters.nvim) | Disabled |
 | [hardtime.nvim](https://github.com/m4xshen/hardtime.nvim) | Discourage bad habits; Disabled bc I find it doesn't pop-up often and it has non-zero perforamance imapct. |
 

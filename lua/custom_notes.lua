@@ -6,8 +6,21 @@ local M = {}
 -- local actions = fzf.actions
 
 local CONFIG = {
-  dir = "~/Notes/scratch.md",
+  dir = "~/Notes",
+  scratch = "~/Notes/scratch.md",
 }
+
+function M.setup(opts)
+  CONFIG = opts or CONFIG
+end
+
+vim.api.nvim_create_user_command("OxoNotes", function()
+  M.openNotes()
+end, {})
+
+vim.api.nvim_create_user_command("OxoScratch", function()
+  M.openScratch()
+end, {})
 
 -- Function to expand '~' to the user's home directory
 local function expand_tilde(path)
@@ -18,39 +31,19 @@ local function expand_tilde(path)
   return path
 end
 
-function M.setup(opts)
-  CONFIG = opts or CONFIG
+function M.openNotes()
+  M.open(CONFIG.dir)
 end
 
-function M.openNote()
-  -- Move create user command to setup
-  vim.api.nvim_create_user_command("OxoNotes", function()
-    local buf = vim.api.nvim_create_buf(false, true)
-    local file_path = expand_tilde(CONFIG.dir)
-    local file = io.open(file_path, "r")
+function M.openScratch()
+  M.open(CONFIG.scratch)
+end
 
-    print("test 3" .. CONFIG.dir)
-    if file == nil then
-      print("Invalid directory specified for notes")
-      return
-    end
-    local content = file:read("*all")
-    file:close()
-    print("test 3" .. content)
+function M.open(path)
+  vim.cmd("vsplit")
+  vim.cmd("edit " .. expand_tilde(path))
 
-    -- Set the buffer content
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(content, "\n"))
-
-    -- Set buffer name and filetype
-    vim.api.nvim_buf_set_name(buf, file_path)
-    vim.bo[buf].filetype = vim.fn.fnamemodify(file_path, ":e")
-
-    vim.api.nvim_open_win(buf, true, {
-      split = "right",
-      win = 0,
-    })
-  end, { desc = "Open notes vertically" })
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(":OxoNotes<CR>", true, false, true), "n", true)
+  vim.bo.modifiable = true
 end
 
 return M

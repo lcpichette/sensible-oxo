@@ -55,7 +55,7 @@ return {
     config = function()
       require("mason").setup()
 
-      -- Ensure formatters are installed
+      -- Ensure FORMATTERS are installed
       local mason_registry = require("mason-registry")
       local ensure_installed = {
         "stylua",
@@ -72,7 +72,7 @@ return {
 
       -- Ensure LSPs are installed
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ts_ls", "tailwindcss", "cssls", "html", "zls" },
+        ensure_installed = { "lua_ls", "ts_ls", "tailwindcss", "cssls", "html", "zls", "somesass_ls" },
         automatic_installation = true,
       })
 
@@ -107,11 +107,20 @@ return {
           })
         end,
 
+        -- SOMESASS configuration
+        ["somesass_ls"] = function()
+          lspconfig.somesass_ls.setup({
+            capabilities = capabilities,
+            filetypes = { "scss", "less" },
+            root_dir = lspconfig.util.root_pattern(".git", "package.json"),
+          })
+        end,
+
         -- CSSLS configuration
         ["cssls"] = function()
           lspconfig.cssls.setup({
             capabilities = capabilities,
-            filetypes = { "css", "scss", "less" },
+            filetypes = { "css" },
             root_dir = lspconfig.util.root_pattern(".git", "package.json"),
           })
         end,
@@ -159,7 +168,6 @@ return {
       })
     end,
   },
-
 
   -- lualine, bottom status line
   {

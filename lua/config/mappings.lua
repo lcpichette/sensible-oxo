@@ -56,6 +56,12 @@ map("n", "<leader>gs", "<cmd>FzfLua git_status<CR>", { desc = "Git Status" })
 map("n", "<leader>gS", "<cmd>FzfLua git_stash<CR>", { desc = "Git Stash" })
 map("n", "<leader>gb", "<cmd>FzfLua git_branches<CR>", { desc = "Git Branches" })
 
+-- Glance
+vim.keymap.set("n", "gD", "<CMD>Glance definitions<CR>")
+vim.keymap.set("n", "gR", "<CMD>Glance references<CR>")
+vim.keymap.set("n", "gY", "<CMD>Glance type_definitions<CR>")
+vim.keymap.set("n", "gM", "<CMD>Glance implementations<CR>")
+
 -- ============================================
 -- = Quickfix list-related mappings           =
 -- ============================================
@@ -121,10 +127,12 @@ map("n", "<leader>uk", "<cmd>ShowkeysToggle<CR>", { desc = "Show Keys while typi
 -- ============================================
 -- Custom search
 local custom_search = require("custom_search")
-vim.keymap.set("n", "/", custom_search.searchFile, { desc = "Custom FZF lgrep logic" })
+map("n", "/", custom_search.searchFile, { desc = "Custom FZF lgrep logic" })
 -- Enable if you prefer ripgrep to grep
 -- vim.keymap.set("n", "<leader>fw", custom_search.liveRipGrep, { desc = "Find Word" })
 
 -- Custom notes
 local custom_notes = require("custom_notes")
-vim.keymap.set("n", "<leader>n", custom_notes.openNote, { desc = "Toggle Notes" })
+map("n", "<leader>fn", custom_notes.openNotes, { desc = "Find Notes" })
+map("n", "<leader>N", custom_notes.openNotes, { desc = "Find Notes" })
+map("n", "<leader>n", custom_notes.openScratch, { desc = "Toggle To-Do" })

@@ -141,6 +141,12 @@ return {
     end,
   },
 
+  -- Better UI for `K`, `gD`, etc.
+  {
+    "dnlhc/glance.nvim",
+    cmd = "Glance",
+  },
+
   {
     "mfussenegger/nvim-lint",
     config = function()
