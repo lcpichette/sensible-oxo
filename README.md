@@ -123,6 +123,10 @@ https://github.com/user-attachments/assets/53eb0cca-5060-42be-a686-8e48697d4fc6
 ## 🎨 Gallery
 
 
+![2025-01-08@03 05 28 January-08@2x](https://github.com/user-attachments/assets/4857e5c1-0b76-4e5e-b349-55d06c1935f7)
+
+
+
 ## 📦 Plugin Overview
 
 ### Installed Plugins
