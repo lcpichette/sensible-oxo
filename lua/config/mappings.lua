@@ -10,6 +10,7 @@ keymap("n", "<C-j>", "<Cmd>wincmd j<CR>", { noremap = true, silent = true })
 keymap("n", "<C-h>", "<Cmd>wincmd h<CR>", { noremap = true, silent = true })
 keymap("n", "<C-l>", "<Cmd>wincmd l<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "q", ":nohlsearch<CR>", { noremap = true, silent = true })
+--TODO: Also make this action clear the search register.
 
 -- Opinionated settings
 vim.opt.mouse = ""
@@ -34,21 +35,25 @@ map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", { desc = "Code Definition" })
 -- map("n", "<leader>cD", "<cmd>lua vim.lsp.buf.definition()<CR>", { desc = "Code Declaration" })
 -- map("n", "<leader>cr", "<cmd>lua vim.lsp.buf.references()<CR>", { desc = "Code References" })
 
--- Using fzf-lua with lsp instead, you can send items from there to quickfix list if you'd like
-map("n", "<leader>cd", "<cmd>lua require('fzf-lua').lsp_definitions()<CR>", { desc = "Code Definitions" })
-map("n", "<leader>cD", "<cmd>lua require('fzf-lua').lsp_declarations()<CR>", { desc = "Code Declarations" })
-map("n", "<leader>cr", "<cmd>lua require('fzf-lua').lsp_references()<CR>", { desc = "Code References" })
-map("n", "<leader>ca", "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>", { desc = "Code Actions" })
+if CONFIG.fileSearch.fzf_lua then
+  -- Using fzf-lua with lsp instead, you can send items from there to quickfix list if you'd like
+  map("n", "<leader>cd", "<cmd>lua require('fzf-lua').lsp_definitions()<CR>", { desc = "Code Definitions" })
+  map("n", "<leader>cD", "<cmd>lua require('fzf-lua').lsp_declarations()<CR>", { desc = "Code Declarations" })
+  map("n", "<leader>cr", "<cmd>lua require('fzf-lua').lsp_references()<CR>", { desc = "Code References" })
+  map("n", "<leader>ca", "<cmd>lua require('fzf-lua').lsp_code_actions()<CR>", { desc = "Code Actions" })
+end
 
 -- ============================================
 -- = fzf-lua file/search-related mappings    =
 -- ============================================
-map("n", "<leader>ff", "<cmd>FzfLua files<CR>", { desc = "Find Files" })
-map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { desc = "Find Word/Grep" })
-map("n", "<leader>fB", "<cmd>FzfLua buffers<CR>", { desc = "Find Buffers" })
-map("n", "<leader>fh", "<cmd>FzfLua help_tags<CR>", { desc = "Find Help" })
-map("n", "<leader>fl", "<cmd>FzfLua resume<CR>", { desc = "Find last search" })
-map("n", "<leader>fg", "<cmd>FzfLua git_status<CR>", { desc = "Find Changed Files" })
+if CONFIG.fileSearch.fzf_lua then
+  map("n", "<leader>ff", "<cmd>FzfLua files<CR>", { desc = "Find Files" })
+  map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { desc = "Find Word/Grep" })
+  map("n", "<leader>fB", "<cmd>FzfLua buffers<CR>", { desc = "Find Buffers" })
+  map("n", "<leader>fh", "<cmd>FzfLua help_tags<CR>", { desc = "Find Help" })
+  map("n", "<leader>fl", "<cmd>FzfLua resume<CR>", { desc = "Find last search" })
+  map("n", "<leader>fg", "<cmd>FzfLua git_status<CR>", { desc = "Find Changed Files" })
+end
 
 -- ============================================
 -- = fzf-lua git-related mappings    =
@@ -71,10 +76,12 @@ end
 -- ============================================
 -- = Glance (LSP-peak) mappings    =
 -- ============================================
-map("n", "gd", "<CMD>Glance definitions<CR>", { desc = "Find Definitions" })
-map("n", "gr", "<CMD>Glance references<CR>", { desc = "Find References" })
-map("n", "gy", "<CMD>Glance type_definitions<CR>", { desc = "Find Type Definitions" })
-map("n", "gm", "<CMD>Glance implementations<CR>", { desc = "Find Implementations" })
+if CONFIG.glance then
+  map("n", "gd", "<CMD>Glance definitions<CR>", { desc = "Find Definitions" })
+  map("n", "gr", "<CMD>Glance references<CR>", { desc = "Find References" })
+  map("n", "gy", "<CMD>Glance type_definitions<CR>", { desc = "Find Type Definitions" })
+  map("n", "gm", "<CMD>Glance implementations<CR>", { desc = "Find Implementations" })
+end
 
 -- ============================================
 -- = Quickfix list-related mappings           =
@@ -88,19 +95,19 @@ map("n", "<leader>qc", ":cclose<CR>", { desc = "Close Quickfix List" })
 map("n", "<leader>qn", ":cnext<CR>", { desc = "Next Quickfix" })
 map("n", "<leader>qp", ":cprev<CR>", { desc = "Prev Quickfix" })
 
--- Quicker-related
-local quicker = require("quicker")
-
--- Define a toggle function for expand/collapse
-local is_expanded = false
-map("n", "<leader>qt", function()
-  if is_expanded then
-    quicker.collapse()
-  else
-    quicker.expand()
-  end
-  is_expanded = not is_expanded
-end, { desc = "Toggle quickfix expand/collapse" })
+if CONFIG.quickfix.quicker then
+  local quicker = require("quicker")
+  -- Define a toggle function for expand/collapse
+  local is_expanded = false
+  map("n", "<leader>qt", function()
+    if is_expanded then
+      quicker.collapse()
+    else
+      quicker.expand()
+    end
+    is_expanded = not is_expanded
+  end, { desc = "Toggle quickfix expand/collapse" })
+end
 
 -- ============================================
 -- = Commenting-related mappings              =
@@ -127,9 +134,11 @@ end, { desc = "Live grep TODOs in Lua files" })
 -- ============================================
 -- = Grug-Far Mappings                        =
 -- ============================================
-map("n", "<leader>fr", function()
-  require("grug-far").open({ windowCreationCommand = "vsplit" })
-end, { desc = "Find and Replace" })
+if CONFIG.grugfar then
+  map("n", "<leader>fr", function()
+    require("grug-far").open({ windowCreationCommand = "vsplit" })
+  end, { desc = "Find and Replace" })
+end
 
 -- ============================================
 -- = ShowKeys Mappings                        =
@@ -139,14 +148,18 @@ map("n", "<leader>uk", "<cmd>ShowkeysToggle<CR>", { desc = "Show Keys while typi
 -- ============================================
 -- = Custom Modules Mappings                  =
 -- ============================================
--- Custom search
-local custom_search = require("custom_search")
-map("n", "/", custom_search.searchFile, { desc = "Custom FZF lgrep logic" })
--- Enable if you prefer ripgrep to grep
--- vim.keymap("n", "<leader>fw", custom_search.liveRipGrep, { desc = "Find Word" })
+if CONFIG.custom.search_utils then
+  -- Custom search
+  local custom_search = require("custom_search")
+  map("n", "/", custom_search.searchFile, { desc = "Custom FZF lgrep logic" })
+  -- Enable if you prefer ripgrep to grep
+  -- vim.keymap("n", "<leader>fw", custom_search.liveRipGrep, { desc = "Find Word" })
+end
 
--- Custom notes
-local custom_notes = require("custom_notes")
-map("n", "<leader>fn", custom_notes.openNotes, { desc = "Find Notes" })
-map("n", "<leader>N", custom_notes.openNotes, { desc = "Find Notes" })
-map("n", "<leader>n", custom_notes.openScratch, { desc = "Toggle To-Do" })
+if CONFIG.custom.notes then
+  -- Custom notes
+  local custom_notes = require("custom_notes")
+  map("n", "<leader>fn", custom_notes.openNotes, { desc = "Find Notes" })
+  map("n", "<leader>N", custom_notes.openNotes, { desc = "Find Notes" })
+  map("n", "<leader>n", custom_notes.openScratch, { desc = "Toggle To-Do" })
+end

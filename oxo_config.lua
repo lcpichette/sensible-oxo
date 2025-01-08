@@ -26,6 +26,7 @@ return {
   markview = true,
   blankline = true,
   hardtime = false,
+  glance = true,
 
   -- Experimental Custom Plugins
   custom = {
