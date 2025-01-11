@@ -7,6 +7,7 @@ return {
     dependencies = "rafamadriz/friendly-snippets",
 
     version = "*",
+    event = { "InsertEnter", "CmdlineEnter" },
     -- If you use nix, you can build from source using latest nightly rust with:
     -- build = 'nix run .#build-plugin',
 
@@ -78,6 +79,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     enabled = CONFIG.lsp,
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       local lspconfig = require("lspconfig")
 

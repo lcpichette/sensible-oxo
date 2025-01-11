@@ -4,7 +4,7 @@ return {
   -- Telescope: Fuzzy Finder
   {
     "ibhagwan/fzf-lua",
-    cmd = { "Files", "Rg" },
+    cmd = { "Files", "Rg", "FzfLua" },
     enabled = CONFIG.fileSearch.fzf_lua,
     dependencies = {
       "nvim-tree/nvim-web-devicons", -- optional for file icons
@@ -43,6 +43,20 @@ return {
     config = function(_, opts)
       require("fzf-lua").setup(opts)
     end,
+  },
+
+  -- Snap (fzf-lua alternative)
+  {
+    "camspiers/snap",
+    enabled = CONFIG.fileSearch.snap,
+  },
+
+  -- Telescope (fzf-lua alternative)
+  {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    enabled = CONFIG.fileSearch.telescope,
   },
 
   -- Better quickfix (context lines, editable buffer, improved styling)

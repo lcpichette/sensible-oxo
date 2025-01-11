@@ -58,9 +58,53 @@ end
 -- ============================================
 -- = fzf-lua git-related mappings    =
 -- ============================================
-map("n", "<leader>gs", "<cmd>FzfLua git_status<CR>", { desc = "Git Status" })
-map("n", "<leader>gS", "<cmd>FzfLua git_stash<CR>", { desc = "Git Stash" })
-map("n", "<leader>gb", "<cmd>FzfLua git_branches<CR>", { desc = "Git Branches" })
+if CONFIG.fileSearch.fzf_lua then
+  map("n", "<leader>gs", "<cmd>FzfLua git_status<CR>", { desc = "Git Status" })
+  map("n", "<leader>gS", "<cmd>FzfLua git_stash<CR>", { desc = "Git Stash" })
+  map("n", "<leader>gb", "<cmd>FzfLua git_branches<CR>", { desc = "Git Branches" })
+end
+
+-- ============================================
+-- = Snap mappings    =
+-- ============================================
+if CONFIG.fileSearch.snap then
+  local snap = require("snap")
+  snap.maps({
+    { "<Leader>ff", snap.config.file({ producer = "ripgrep.file" }), { desc = "Find by Filename" } },
+    { "<Leader>fw", snap.config.vimgrep({}), { desc = "Find by Word" } },
+    { "<Leader>fo", snap.config.file({ producer = "vim.oldfile" }), { desc = "Find Recent Files" } },
+    { "<Leader>fb", snap.config.file({ producer = "vim.buffer" }), { desc = "Find Buffers" } },
+  })
+end
+
+-- Telescope
+if CONFIG.fileSearch.telescope then
+  map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", { desc = "Find files" })
+  map("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", { desc = "Find by grep" })
+  map("n", "<leader>fh", "<cmd>Telescope help_tags<CR>", { desc = "Find help tags" })
+  map("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", { desc = "Find old files" })
+  map("n", "<leader>fc", "<cmd>Telescope commands<CR>", { desc = "Find commands" })
+  map("n", "<leader>fq", "<cmd>Telescope quickfix<CR>", { desc = "Find quickfix items" })
+  map("n", "<leader>fr", "<cmd>Telescope resume<CR>", { desc = "Find by last search" })
+  map("n", "<leader>fm", "<cmd>Telescope man_pages<CR>", { desc = "Find Manual Pages" })
+
+  -- Git-related pickers
+  map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", { desc = "Git commits" })
+  map("n", "<leader>gb", "<cmd>Telescope git_branches<CR>", { desc = "Git branches" })
+  map("n", "<leader>gs", "<cmd>Telescope git_status<CR>", { desc = "Git status" })
+  map("n", "<leader>gf", "<cmd>Telescope git_files<CR>", { desc = "Git files" })
+
+  -- LSP-related pickers with <leader>b{key}
+  map("n", "<leader>bd", "<cmd>Telescope lsp_definitions<CR>", { desc = "LSP definitions" })
+  map("n", "<leader>bi", "<cmd>Telescope lsp_implementations<CR>", { desc = "LSP implementations" })
+  map("n", "<leader>br", "<cmd>Telescope lsp_references<CR>", { desc = "LSP references" })
+  map("n", "<leader>bs", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Document symbols" })
+  map("n", "<leader>bw", "<cmd>Telescope lsp_workspace_symbols<CR>", { desc = "Workspace symbols" })
+
+  -- Search and session pickers
+  map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Fuzzy find in buffer" })
+  map("n", "<leader>fd", "<cmd>Telescope diagnostics<CR>", { desc = "Find diagnostics" })
+end
 
 -- ============================================
 -- = Neogit-related mappings    =
@@ -125,7 +169,6 @@ end
 -- = FZF-Lua custom mappings                  =
 -- ============================================
 -- Todo-Comment specific integration w/ fzf-lua
--- TODO: Fix this
 map("n", "<leader>tf", function()
   require("fzf-lua").grep({ search = "TODO|FIX|HACK|WARN|NOTE" })
 end, { desc = "Search TODOs with fzf-lua" })
@@ -151,7 +194,7 @@ map("n", "<leader>uk", "<cmd>ShowkeysToggle<CR>", { desc = "Show Keys while typi
 -- ============================================
 -- = Custom Modules Mappings                  =
 -- ============================================
-if CONFIG.custom.search_utils then
+if CONFIG.custom.search_utils and CONFIG.fileSearch.fzf_lua then
   -- Custom search
   local custom_search = require("custom_search")
   map("n", "/", custom_search.searchFile, { desc = "Custom FZF lgrep logic" })

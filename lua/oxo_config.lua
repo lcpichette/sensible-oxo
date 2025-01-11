@@ -11,10 +11,12 @@ return {
   improvedMotions = true, -- Spider.nvim
   lspStatusIndicators = true, -- Messages visible bottom right indiciating load status of LSPs
   fileSearch = {
-    fzf_lua = true,
+    fzf_lua = false,
+    snap = false,
+    telescope = true,
   },
   quickfix = {
-    quicker = true,
+    quicker = false,
   },
   statusline = {
     lualine = false,
@@ -25,16 +27,25 @@ return {
     autopairs = false,
   },
   commentToggling = true,
+  ui = {
+    splash_art = {
+      alpha = false,
+    },
+    popups = {
+      notify = true,
+      noice = false,
+    },
+  },
 
   -- Package-level
   git = {
-    neogit = true, -- UI Git interaction in neovim; "Magik" for nvim
-    gitsigns = true, -- git diff indicators in buffer (left of line numbers)
+    neogit = false, -- UI Git interaction in neovim; "Magik" for nvim
+    gitsigns = false, -- git diff indicators in buffer (left of line numbers)
   },
   neorg = false,
   grugfar = false,
   markview = true,
-  blankline = true,
+  blankline = false,
   hardtime = false,
   glance = true,
 

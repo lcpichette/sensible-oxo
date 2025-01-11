@@ -201,6 +201,7 @@ return {
   {
     "goolord/alpha-nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" }, -- Add dependencies if needed
+    enabled = CONFIG.ui.splash_art.alpha,
     config = function()
       local alpha = require("alpha")
       local dashboard = require("alpha.themes.dashboard")
@@ -239,10 +240,57 @@ bug.       {_.-``-'         {_/
     end,
   },
 
+  {
+    "rcarriga/nvim-notify",
+    enabled = CONFIG.ui.popups.notify,
+    config = function()
+      local notify = require("notify")
+
+      -- Set up nvim-notify with Oxocarbon-style highlights
+      ---@diagnostic disable-next-line: missing-fields
+      notify.setup({
+        stages = "static", -- Or any preferred animation
+        timeout = 3000, -- Time for notifications to disappear
+        background_colour = "#000000", -- Use Oxocarbon's preferred background color
+        fps = 10,
+        on_open = function(win)
+          vim.api.nvim_win_set_config(win, { focusable = false })
+        end,
+      })
+
+      -- Custom highlights for Oxocarbon theme
+      vim.cmd([[
+        highlight NotifyINFOBorder guifg=#78dce8
+        highlight NotifyINFOTitle  guifg=#78dce8
+        highlight NotifyINFOIcon   guifg=#78dce8
+
+        highlight NotifyWARNBorder guifg=#fc9867
+        highlight NotifyWARNTitle  guifg=#fc9867
+        highlight NotifyWARNIcon   guifg=#fc9867
+
+        highlight NotifyERRORBorder guifg=#ff6188
+        highlight NotifyERRORTitle  guifg=#ff6188
+        highlight NotifyERRORIcon   guifg=#ff6188
+
+        highlight NotifyDEBUGBorder guifg=#a9dc76
+        highlight NotifyDEBUGTitle  guifg=#a9dc76
+        highlight NotifyDEBUGIcon   guifg=#a9dc76
+
+        highlight NotifyTRACEBorder guifg=#ab9df2
+        highlight NotifyTRACETitle  guifg=#ab9df2
+        highlight NotifyTRACEIcon   guifg=#ab9df2
+      ]])
+
+      -- Set notify as default for vim notifications
+      vim.notify = notify
+    end,
+  },
+
   -- Changes alerts, command line aesthetic and location, and some other ui things
   {
     "folke/noice.nvim",
     event = "VeryLazy",
+    enabled = CONFIG.ui.popups.noice,
     opts = {
       cmdline = {
         enabled = true,
