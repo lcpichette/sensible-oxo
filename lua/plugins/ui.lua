@@ -169,7 +169,7 @@ return {
             {
               "diagnostics",
               sources = { "nvim_lsp" },
-              symbols = { error = " ", warn = " ", info = " ", hint = " " },
+              symbols = { error = "" .. " ", warn = "" .. " ", info = "󰙎 ", hint = "󰌶 " },
               diagnostics_color = {
                 error = { fg = oxo.red },
                 warn = { fg = oxo.purple },
@@ -218,14 +218,42 @@ return {
 bug.       {_.-``-'         {_/
       ]]
 
-      dashboard.section.buttons.val = {
-        dashboard.button("f", "  Find Files", ":FzfLua files<CR>"),
-        dashboard.button("w", "  Live Grep", ":FzfLua live_grep<CR>"),
-        dashboard.button("r", "  Resume Search", ":FzfLua live_grep<CR>"),
-        dashboard.button("b", "  Open Buffers", ":FzfLua buffers<CR>"),
-        dashboard.button("h", "?  Help Tags", ":FzfLua help_tags<CR>"),
-        dashboard.button("q", "  Quit", ":qa<CR>"),
+      local searchCommands = {
+        {
+          name = "fzf_lua",
+          commands = {
+            ":FzfLua files<CR>",
+            ":FzfLua live_grep<CR>",
+            ":FzfLua resume<CR>",
+            ":FzfLua help_tags<CR>",
+          },
+        },
+        {
+          name = "telescope",
+          commands = {
+            ":Telescope find_files<CR>",
+            ":Telescope live_grep<CR>",
+            ":Telescope resume<CR>",
+            ":Telescope help_tags<CR>",
+          },
+        },
       }
+
+      if not CONFIG.fileSearch.snap then
+        local commands
+        if CONFIG.fileSearch.telescope then
+          commands = searchCommands[2].commands
+        elseif CONFIG.fileSearch.fzf_lua then
+          commands = searchCommands[1].commands
+        end
+        dashboard.section.buttons.val = {
+          dashboard.button("f", "  Find Files", commands[1]),
+          dashboard.button("w", "  Live Grep", commands[2]),
+          dashboard.button("r", "  Resume Search", commands[3]),
+          dashboard.button("h", "?  Help Tags", commands[4]),
+          dashboard.button("q", "  Quit", ":qa<CR>"),
+        }
+      end
 
       -- center content
       dashboard.config.layout = {

@@ -95,11 +95,9 @@ if CONFIG.fileSearch.telescope then
   map("n", "<leader>gf", "<cmd>Telescope git_files<CR>", { desc = "Git files" })
 
   -- LSP-related pickers with <leader>b{key}
-  map("n", "<leader>bd", "<cmd>Telescope lsp_definitions<CR>", { desc = "LSP definitions" })
-  map("n", "<leader>bi", "<cmd>Telescope lsp_implementations<CR>", { desc = "LSP implementations" })
-  map("n", "<leader>br", "<cmd>Telescope lsp_references<CR>", { desc = "LSP references" })
-  map("n", "<leader>bs", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Document symbols" })
-  map("n", "<leader>bw", "<cmd>Telescope lsp_workspace_symbols<CR>", { desc = "Workspace symbols" })
+  map("n", "<leader>cd", "<cmd>Telescope lsp_definitions<CR>", { desc = "LSP definitions" })
+  map("n", "<leader>ci", "<cmd>Telescope lsp_implementations<CR>", { desc = "LSP implementations" })
+  map("n", "<leader>cr", "<cmd>Telescope lsp_references<CR>", { desc = "LSP references" })
 
   -- Search and session pickers
   map("n", "<leader>fz", "<cmd>Telescope current_buffer_fuzzy_find<CR>", { desc = "Fuzzy find in buffer" })
@@ -125,6 +123,16 @@ if CONFIG.glance then
   map("n", "gr", "<CMD>Glance references<CR>", { desc = "Find References" })
   map("n", "gy", "<CMD>Glance type_definitions<CR>", { desc = "Find Type Definitions" })
   map("n", "gm", "<CMD>Glance implementations<CR>", { desc = "Find Implementations" })
+end
+
+-- ============================================
+-- = Bookmarks mappings    =
+-- ============================================
+if CONFIG.bookmarks then
+  map({ "n", "v" }, "mm", "<cmd>BookmarksMark<cr>", { desc = "Mark current line into active BookmarkList." })
+  map({ "n", "v" }, "mo", "<cmd>BookmarksGoto<cr>", { desc = "Go to bookmark in current active BookmarkList" })
+  map({ "n", "v" }, "md", "<cmd>BookmarksDesc<cr>", { desc = "Add description to the bookmark under cursor" })
+  map({ "n", "v" }, "mt", "<cmd>BookmarksTree<cr>", { desc = "Show bookmarks tree" })
 end
 
 -- ============================================
@@ -157,25 +165,83 @@ end
 -- = Commenting-related mappings              =
 -- ============================================
 if CONFIG.commentToggling then
+  local feedkeys = vim.api.nvim_feedkeys
   map("n", "<leader>/", function()
-    vim.api.nvim_feedkeys("gcc", "x", true)
+    feedkeys("gcc", "x", true)
   end, { desc = "Toggle Line Comment" })
   map("v", "<leader>/", function()
-    vim.api.nvim_feedkeys("gb", "v", true)
+    feedkeys("gb", "v", true)
   end, { desc = "Toggle Line Comment" })
+
+  map("n", "<leader>Ct", function() --  󰢷
+    feedkeys("gcA", "v", false)
+    feedkeys(" 󰢷  ", "v", false)
+  end, { desc = "'Mark' 󰢷  Task" })
+  map("n", "mt", function()
+    feedkeys("gcA", "v", false)
+    feedkeys(" 󰢷  ", "v", false)
+  end, { desc = "'Mark' 󰢷  Task" })
+
+  map("n", "<leader>Ci", function() --    inv
+    feedkeys("gcA", "v", false)
+    feedkeys("   ", "v", false)
+  end, { desc = "'Mark'   Investigate" })
+  map("n", "mi", function()
+    feedkeys("gcA", "v", false)
+    feedkeys("   ", "v", false)
+  end, { desc = "'Mark'   Investigate" })
+
+  map("n", "<leader>Cp", function() --    Pin
+    feedkeys("gcA", "v", false)
+    feedkeys("   ", "v", false)
+  end, { desc = "'Mark'   Pin" })
+  map("n", "mp", function()
+    feedkeys("gcA", "v", false)
+    feedkeys("   ", "v", false)
+  end, { desc = "'Mark'   Pin" })
 end
 
 -- ============================================
 -- = FZF-Lua custom mappings                  =
 -- ============================================
 -- Todo-Comment specific integration w/ fzf-lua
-map("n", "<leader>tf", function()
-  require("fzf-lua").grep({ search = "TODO|FIX|HACK|WARN|NOTE" })
-end, { desc = "Search TODOs with fzf-lua" })
+if CONFIG.fileSearch.fzf_lua then
+  local search = require("fzf-lua")
+  map("n", "<leader>tf", function()
+    search.grep({ search = "TODO|FIX|HACK|WARN|NOTE" })
+  end, { desc = "Find TODOs" })
+  map("n", "<leader>tc", function()
+    search.live_grep({ rg_opts = "--type lua -e TODO|FIX|HACK" })
+  end, { desc = "Find TODOs in Config" })
 
-map("n", "<leader>tc", function()
-  require("fzf-lua").live_grep({ rg_opts = "--type lua -e TODO|FIX|HACK" })
-end, { desc = "Live grep TODOs in Lua files" })
+  map("n", "<leader>tt", function()
+    search.live_grep({ rg_opts = "-e 󰢷 " })
+  end, { desc = "Find all Tasks" })
+  map("n", "<leader>ti", function()
+    search.live_grep({ rg_opts = "-e  " })
+  end, { desc = "Find all Investigations" })
+  map("n", "<leader>tp", function()
+    search.live_grep({ rg_opts = "-e  " })
+  end, { desc = "Find all Pins" })
+elseif CONFIG.fileSearch.telescope then
+  local search = require("telescope.builtin")
+
+  map("n", "<leader>tt", function() --  
+    search.live_grep({
+      default_text = "-e 󰢷 ",
+    })
+  end, { desc = "Find all Tasks" })
+  map("n", "<leader>ti", function()
+    search.live_grep({
+      default_text = "-e  ",
+    })
+  end, { desc = "Find all Investigations" })
+  map("n", "<leader>tp", function()
+    search.live_grep({
+      default_text = "-e  ",
+    })
+  end, { desc = "Find all Pins" })
+end
 
 -- ============================================
 -- = Grug-Far Mappings                        =
@@ -194,10 +260,17 @@ map("n", "<leader>uk", "<cmd>ShowkeysToggle<CR>", { desc = "Show Keys while typi
 -- ============================================
 -- = Custom Modules Mappings                  =
 -- ============================================
-if CONFIG.custom.search_utils and CONFIG.fileSearch.fzf_lua then
+if CONFIG.custom.search_utils and (CONFIG.fileSearch.fzf_lua or CONFIG.fileSearch.telescope) then
   -- Custom search
+  local command
   local custom_search = require("custom_search")
-  map("n", "/", custom_search.searchFile, { desc = "Custom FZF lgrep logic" })
+  if CONFIG.fileSearch.fzf_lua then
+    command = custom_search.searchFile
+  elseif CONFIG.fileSearch.telescope then
+    command = custom_search.search_in_buffer
+  end
+
+  map("n", "/", command, { desc = "Custom search logic" })
   -- Enable if you prefer ripgrep to grep
   -- vim.keymap("n", "<leader>fw", custom_search.liveRipGrep, { desc = "Find Word" })
 end

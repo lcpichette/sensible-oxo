@@ -66,6 +66,33 @@ if CONFIG.fileSearch.fzf_lua then
       return "rg --column --color=always -- " .. vim.fn.shellescape(q or "")
     end, opts)
   end
+elseif CONFIG.fileSearch.telescope then
+  -- Search within the current buffer
+  function M.search_in_buffer()
+    local current_file = vim.api.nvim_buf_get_name(0)
+    if current_file == "" or vim.fn.filereadable(current_file) == 0 then
+      -- Buffer is not associated with a file; search buffer lines
+      require("telescope.builtin").current_buffer_fuzzy_find({
+        prompt_title = "Search Buffer",
+      })
+    else
+      -- Buffer is associated with a file; use live_grep
+      require("telescope.builtin").live_grep({
+        prompt_title = "Search in File",
+        search_dirs = { current_file },
+      })
+    end
+  end
+
+  -- Live grep using Ripgrep
+  function M.live_ripgrep()
+    require("telescope.builtin").live_grep({
+      prompt_title = "Live Ripgrep",
+      additional_args = function()
+        return { "--column", "--color=always" }
+      end,
+    })
+  end
 end
 
 return M

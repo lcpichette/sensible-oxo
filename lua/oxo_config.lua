@@ -29,7 +29,7 @@ return {
   commentToggling = true,
   ui = {
     splash_art = {
-      alpha = false,
+      alpha = true,
     },
     popups = {
       notify = true,
@@ -48,6 +48,9 @@ return {
   blankline = false,
   hardtime = false,
   glance = true,
+  arrow = true,
+  bookmarks = false,
+  spelunk = false,
 
   -- Experimental Custom Plugins
   custom = {
