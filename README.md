@@ -207,31 +207,30 @@ I'd like to think I'm 85% of the way their with the `oxo`, and about 20% of the 
 To get `oxo` to 100% we're going to need community feedback about alternatives (some plugins like fzf-lua vs telescope was a very intentional decision and I will NOT be adding it as a config option due to its a performance issues). Approved (specifiable in config) tools should be able to be turned on and off via the variable config (which does not exist yet). But, if there's a plugin you'd like to see supported via config option specify that in an issue on this repo -- I'm open to suggestions!
 
 NOT STARTED:
-- [ ] Variable configs
-   - Description: Changing variables in a config table `{ ascii_art = "cat" }` to `{ ascii_art = "saturn" }` will, in this example, change the ascii art shown by alpha-nvim to be a saturn instead of the current cat. 
-   - [ ] Establish design Information Architecture that is easy to tweak and read `sensible-oxo`-specific configs that make performant changes to the overall project (We shouldn't load every config option; only load what we need and only when we need it)
-   - [ ] Create config structure and default file.
-   - [ ] Create loader to read these config options and load only what's relevant as per the specified config
-   - [ ] Support the following config options:
-      - [ ] Ascii Art changes to "dashboard" `{ ascii_art = "cat" }`
-      - [ ] "Magic" LSP,Lint,Format selection based on desired supported filetypes `{ support_fts = { "lua", "ts", "js", "zig", "jsx", "tsx" } }`
-      - [ ] Git (buffer) `{ git_buffer = true }`
-      - [ ] Diagnostics (buffer) `{ diagnostics_buffer = true }`
-      - [ ] Lualine selectable presets `{ lualine_preset = "default" }`
-      - [ ] Commandline location `{ commandline_style = "floating" }`
 - [ ] Add project navigation
 - [ ] Add quick terminal options (floating, horizontal, etc)
 - [ ] Add sessions, if not too harmful to load time
 
 WIP:
-- [ ] Add custom notes
-   - [ ] Syntax highlighting
-   - [ ] Persistent changes
-   - [ ] Incredibly quick to load notes and the module
+- [~] Variable configs
+   - Description: Changing variables in a config table `{ ascii_art = "cat" }` to `{ ascii_art = "saturn" }` will, in this example, change the ascii art shown by alpha-nvim to be a saturn instead of the current cat. 
+   - [x] Establish design Information Architecture that is easy to tweak and read `sensible-oxo`-specific configs that make performant changes to the overall project (We shouldn't load every config option; only load what we need and only when we need it)
+   - [x] Create config structure and default file.
+   - [~] Support the following config options:
+      - [ ] Ascii Art changes to "dashboard" `{ ascii_art = "cat" }`
+      - [ ] "Magic" LSP,Lint,Format selection based on desired supported filetypes `{ support_fts = { "lua", "ts", "js", "zig", "jsx", "tsx" } }`
+      - [x] Git (buffer) `{ git_buffer = true }`
+      - [ ] Diagnostics (buffer) `{ diagnostics_buffer = true }`
+      - [ ] Lualine selectable presets `{ lualine_preset = "default" }`
+      - [ ] Commandline location `{ commandline_style = "floating" }`
 
 DONE:
 - [x] Change `/` to use fzf-lua + vim search register w/ Oxo highlighting.
 - [x] Fix inconsistent coloring in ascii art
+- [x] Add custom notes
+   - [x] Syntax highlighting
+   - [x] Persistent changes
+   - [x] Incredibly quick to load notes and the module
 
 ## 🤝 Credits
 
