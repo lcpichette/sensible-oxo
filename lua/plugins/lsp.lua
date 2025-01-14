@@ -232,6 +232,28 @@ return {
     end,
   },
 
+  -- Conform, for file formatting
+  {
+    "stevearc/conform.nvim",
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          javascript = { "eslint_d", "prettierd" },
+          typescript = { "eslint_d", "prettierd" },
+          vue = { "eslint_d", "prettierd" },
+          svelte = { "eslint_d", "prettierd" },
+        },
+      })
+
+      -- Format on save
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        callback = function(args)
+          require("conform").format({ bufnr = args.buf })
+        end,
+      })
+    end,
+  },
+
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
