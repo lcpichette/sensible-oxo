@@ -9,8 +9,6 @@ keymap("n", "<C-k>", "<Cmd>wincmd k<CR>", { noremap = true, silent = true })
 keymap("n", "<C-j>", "<Cmd>wincmd j<CR>", { noremap = true, silent = true })
 keymap("n", "<C-h>", "<Cmd>wincmd h<CR>", { noremap = true, silent = true })
 keymap("n", "<C-l>", "<Cmd>wincmd l<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "q", ":nohlsearch<CR>", { noremap = true, silent = true })
---TODO: Also make this action clear the search register.
 
 -- Opinionated settings
 vim.opt.mouse = ""
@@ -18,6 +16,20 @@ vim.g.mapleader = " "
 
 -- Plugin-related keybinds
 local map = vim.keymap.set
+
+-- Custom search registry related mappings
+vim.api.nvim_set_keymap("n", "q", "", {
+  noremap = true,
+  silent = true,
+  callback = function()
+    vim.cmd("nohlsearch")
+    vim.fn.setreg("/", "")
+    vim.cmd("let @/ = ''")
+    vim.cmd("silent! call histdel('search', -1)")
+    vim.fn.setreg("/", "\\%#") -- Set a no-op pattern that matches nothing
+    vim.cmd("let @/ = '\\%#'") -- Update Vim's internal search state
+  end,
+})
 
 -- ============================================
 -- = nvim-lspconfig mappings                  =
@@ -51,7 +63,7 @@ if CONFIG.fileSearch.fzf_lua then
   map("n", "<leader>fw", "<cmd>FzfLua live_grep<CR>", { desc = "Find Word/Grep" })
   map("n", "<leader>fB", "<cmd>FzfLua buffers<CR>", { desc = "Find Buffers" })
   map("n", "<leader>fh", "<cmd>FzfLua help_tags<CR>", { desc = "Find Help" })
-  map("n", "<leader>fl", "<cmd>FzfLua resume<CR>", { desc = "Find last search" })
+  map("n", "<leader>fo", "<cmd>FzfLua resume<CR>", { desc = "Find last search (old files)" })
   map("n", "<leader>fg", "<cmd>FzfLua git_status<CR>", { desc = "Find Changed Files" })
 end
 
@@ -173,7 +185,7 @@ if CONFIG.commentToggling then
     feedkeys("gb", "v", true)
   end, { desc = "Toggle Line Comment" })
 
-  map("n", "<leader>Ct", function() --  󰢷
+  map("n", "<leader>Ct", function() --  󰢷 Task
     feedkeys("gcA", "v", false)
     feedkeys(" 󰢷  ", "v", false)
   end, { desc = "'Mark' 󰢷  Task" })
@@ -182,7 +194,7 @@ if CONFIG.commentToggling then
     feedkeys(" 󰢷  ", "v", false)
   end, { desc = "'Mark' 󰢷  Task" })
 
-  map("n", "<leader>Ci", function() --    inv
+  map("n", "<leader>Ci", function() --    Investigate
     feedkeys("gcA", "v", false)
     feedkeys("   ", "v", false)
   end, { desc = "'Mark'   Investigate" })
@@ -199,6 +211,15 @@ if CONFIG.commentToggling then
     feedkeys("gcA", "v", false)
     feedkeys("   ", "v", false)
   end, { desc = "'Mark'   Pin" })
+
+  map("n", "<leader>Cq", function() --   Question
+    feedkeys("gcA", "v", false)
+    feedkeys("  ", "v", false)
+  end, { desc = "'Mark'  Question" })
+  map("n", "mq", function()
+    feedkeys("gcA", "v", false)
+    feedkeys("  ", "v", false)
+  end, { desc = "'Mark'  Question" })
 end
 
 -- ============================================
@@ -215,32 +236,37 @@ if CONFIG.fileSearch.fzf_lua then
   end, { desc = "Find TODOs in Config" })
 
   map("n", "<leader>tt", function()
-    search.live_grep({ rg_opts = "-e 󰢷 " })
+    search.grep({ search = "󰢷" })
   end, { desc = "Find all Tasks" })
   map("n", "<leader>ti", function()
-    search.live_grep({ rg_opts = "-e  " })
+    search.grep({ search = "" })
   end, { desc = "Find all Investigations" })
   map("n", "<leader>tp", function()
-    search.live_grep({ rg_opts = "-e  " })
+    search.live_grep({ search = "" })
   end, { desc = "Find all Pins" })
 elseif CONFIG.fileSearch.telescope then
   local search = require("telescope.builtin")
 
   map("n", "<leader>tt", function() --  
     search.live_grep({
-      default_text = "-e 󰢷 ",
+      default_text = "󰢷",
     })
   end, { desc = "Find all Tasks" })
   map("n", "<leader>ti", function()
     search.live_grep({
-      default_text = "-e  ",
+      default_text = "",
     })
   end, { desc = "Find all Investigations" })
   map("n", "<leader>tp", function()
     search.live_grep({
-      default_text = "-e  ",
+      default_text = "",
     })
   end, { desc = "Find all Pins" })
+  map("n", "<leader>tq", function()
+    search.live_grep({
+      default_text = "",
+    })
+  end, { desc = "Find all Questions" })
 end
 
 -- ============================================
