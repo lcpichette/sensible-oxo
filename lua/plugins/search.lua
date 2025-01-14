@@ -40,8 +40,8 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      require("fzf-lua").setup(opts)
+    config = function(_, _)
+      require("fzf-lua").setup({ "fzf-native" })
     end,
   },
 
