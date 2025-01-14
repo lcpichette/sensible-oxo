@@ -73,7 +73,17 @@ return {
 
       -- Ensure LSPs are installed
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ts_ls", "tailwindcss", "cssls", "html", "zls", "somesass_ls", "angularls" },
+        ensure_installed = {
+          "lua_ls",
+          "ts_ls",
+          "tailwindcss",
+          "cssls",
+          "html",
+          "zls",
+          "somesass_ls",
+          "angularls",
+          "eslint",
+        },
         automatic_installation = true,
       })
 
@@ -143,6 +153,39 @@ return {
         -- TypeScript server configuration
         ["ts_ls"] = function()
           lspconfig.ts_ls.setup({
+            filetypes = {
+              "javascript",
+              "typescript",
+            },
+            settings = {
+              javascript = {
+                suggest = {
+                  autoImports = true,
+                },
+              },
+              typescript = {
+                suggest = {
+                  autoImports = true,
+                },
+              },
+            },
+          })
+        end,
+
+        ["eslint"] = function()
+          lspconfig.eslint.setup({
+            filetypes = {
+              "javascript",
+              "javascriptreact",
+              "javascript.jsx",
+              "typescript",
+              "typescriptreact",
+              "typescript.tsx",
+              "vue",
+              "svelte",
+              "astro",
+            },
+            root_dir = lspconfig.util.root_pattern("."),
             settings = {
               javascript = {
                 suggest = {

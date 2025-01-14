@@ -108,6 +108,7 @@ return {
   -- Bookmarks
   {
     "LintaoAmons/bookmarks.nvim",
+    enabled = CONFIG.bookmarks,
     dependencies = {
       { "kkharji/sqlite.lua" },
       { "nvim-telescope/telescope.nvim" },
