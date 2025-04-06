@@ -1,0 +1,87 @@
+
+  Startuptime: 63.34ms
+
+  Based on the actual CPU time of the Neovim process till UIEnter.
+  This is more accurate than `nvim --startuptime`.
+    LazyStart 12.98ms
+    LazyDone  43.09ms (+30.11ms)
+    UIEnter   63.34ms (+20.25ms)
+
+  Profile
+
+  You can press <C-s> to change sorting between chronological order & time taken.
+  Press <C-f> to filter profiling entries that took more time than a given threshold
+
+    ●  lazy.nvim 7.73ms
+      ➜  module 1.95ms
+      ➜  config 0.28ms
+      ➜  spec 3.2ms
+        ★  pkg 0.17ms
+        ★  plugins.editor 0.4ms
+        ★  plugins.highlight 0.22ms
+        ★  plugins.lsp 0.27ms
+        ★  plugins.motion 0.23ms
+        ★  plugins.performance 0.25ms
+        ★  plugins.search 0.16ms
+        ★  plugins.theme 0.14ms
+        ★  plugins.ui 0.29ms
+        ★  resolve plugins 0.33ms
+      ➜  state 0.12ms
+      ➜  install 0.04ms
+      ➜  handlers 1.36ms
+    ●  startup 36.24ms
+      ➜  runtime/filetype.lua 0.36ms
+      ➜  init 0.03ms
+      ➜  start 34.1ms
+        ★  start  oxocarbon.nvim 2.94ms
+        ★  start  oil.nvim 3.02ms
+        ★  start  todo-comments.nvim 2.36ms
+          ‒  plenary.nvim 0.39ms
+            ●  plenary.nvim/plugin/plenary.vim 0.22ms
+          ‒  todo-comments.nvim/plugin/todo.vim 0.17ms
+        ★  start  alpha-nvim 1.56ms
+          ‒  nvim-web-devicons 0.26ms
+            ●  nvim-web-devicons/plugin/nvim-web-devicons.vim 0.13ms
+        ★  start  indent-blankline.nvim 5.91ms
+        ★  start  hop.nvim 1.72ms
+          ‒  hop.nvim/plugin/hop.vim 0.27ms
+        ★  start  fidget.nvim 1.23ms
+        ★  start  Comment.nvim 2.01ms
+          ‒  Comment.nvim/plugin/Comment.lua 1.66ms
+        ★  start  nvim-lspconfig 12.53ms
+          ‒  nvim-lspconfig/plugin/lspconfig.lua 1.01ms
+          ‒  blink.cmp 7.59ms
+            ●  friendly-snippets 0.21ms
+        ★  start  vim-sleuth 0.68ms
+          ‒  vim-sleuth/plugin/sleuth.vim 0.55ms
+      ➜  rtp plugins 1.38ms
+        ★  runtime/plugin/editorconfig.lua 0.25ms
+        ★  runtime/plugin/man.lua 0.24ms
+        ★  runtime/plugin/osc52.lua 0.5ms
+        ★  runtime/plugin/rplugin.vim 0.13ms
+        ★  runtime/plugin/shada.vim 0.07ms
+        ★  runtime/plugin/spellfile.vim 0.05ms
+      ➜  after 0.35ms
+        ★  after/plugin/commands.lua 0.25ms
+    ●  quicker.nvim 0.8ms
+    ●  fzf-lua 9.37ms
+      ➜  fzf-lua/plugin/fzf-lua.lua 0.31ms
+      ➜  fzf-lua/plugin/fzf-lua.vim 0.08ms
+    ●  BufWinEnter 7.7ms
+      ➜  lualine.nvim 7.6ms
+        ★  gitsigns.nvim 2.42ms
+    ●  startuptime 63.34ms
+    ●  VeryLazy 20.51ms
+      ➜  noice.nvim 2.52ms
+        ★  nui.nvim 0.23ms
+        ★  nvim-notify 0.2ms
+      ➜  which-key.nvim 1.27ms
+        ★  which-key.nvim/plugin/which-key.lua 0.17ms
+      ➜  targets.vim 0.35ms
+        ★  targets.vim/plugin/targets.vim 0.29ms
+      ➜  arrow.nvim 3.15ms
+      ➜  grug-far.nvim 9.36ms
+      ➜  dressing.nvim 1.98ms
+        ★  dressing.nvim/plugin/dressing.lua 1.49ms
+      ➜  arrow 0ms
+
